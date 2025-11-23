@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ViewCounter } from "@/components/ui/ViewCounter";
 
 export default function ArquivosPage() {
     const [currentPath, setCurrentPath] = useState("C:\\DESAFIO_EXTREMO");
@@ -18,8 +17,6 @@ export default function ArquivosPage() {
 
     return (
         <div className="min-h-screen bg-black text-[#00ff00] font-mono p-4 md:p-8 selection:bg-[#00ff00] selection:text-black">
-            {/* View Counter */}
-            <ViewCounter pageId="arquivos" variant="terminal" />
 
             {/* Glitch Effect */}
             <div className="fixed inset-0 pointer-events-none opacity-10 mix-blend-overlay">

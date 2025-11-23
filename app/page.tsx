@@ -4,13 +4,12 @@ import { WhatsAppButton } from "@/components/marketing/WhatsAppButton";
 import { ShareButton } from "@/components/marketing/ShareButton";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { ParticipantsCarousel } from "@/components/marketing/ParticipantsCarousel";
-import { ViewCounter } from "@/components/ui/ViewCounter";
+import { Footer } from "@/components/ui/Footer";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-brand-dark text-white selection:bg-brand-yellow selection:text-black font-sans overflow-x-hidden">
       <TacticalMapBackground />
-      <ViewCounter pageId="home" variant="tactical" />
 
       {/* Hero Section */}
       <section className="relative flex min-h-screen flex-col items-center justify-center px-4 py-12 md:py-24 text-center">
@@ -89,6 +88,8 @@ export default function Home() {
 
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
