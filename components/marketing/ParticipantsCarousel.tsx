@@ -104,6 +104,7 @@ export function ParticipantsCarousel() {
                                     alt="Participant"
                                     fill
                                     className="object-cover"
+                                    sizes="200px"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 

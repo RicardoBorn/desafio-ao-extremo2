@@ -35,6 +35,7 @@ export function WelcomeCover() {
                             height={182}
                             className="w-full max-w-xl h-auto"
                             priority
+                            sizes="(max-width: 768px) 100vw, 576px"
                         />
                     </div>
 
@@ -107,6 +108,7 @@ export function WelcomeCover() {
                             fill
                             className="object-contain"
                             priority
+                            sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
 
