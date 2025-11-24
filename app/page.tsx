@@ -5,6 +5,9 @@ import { ShareButton } from "@/components/marketing/ShareButton";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { ParticipantsCarousel } from "@/components/marketing/ParticipantsCarousel";
 import { Footer } from "@/components/ui/Footer";
+import { StickyWhatsAppButton } from "@/components/marketing/StickyWhatsAppButton";
+import { Sponsors } from "@/components/marketing/Sponsors";
+import { SubscribePopup } from "@/components/marketing/SubscribePopup";
 
 export default function Home() {
   return (
@@ -82,13 +85,20 @@ export default function Home() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ShareButton />
-              <WhatsAppButton />
+              <div className="hidden md:block">
+                <WhatsAppButton />
+              </div>
             </div>
           </div>
+
+          {/* 8. Patrocinadores */}
+          <Sponsors />
 
         </div>
       </section>
 
+      <StickyWhatsAppButton />
+      <SubscribePopup />
       <Footer />
     </div>
   );
