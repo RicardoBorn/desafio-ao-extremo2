@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Footer } from "@/components/ui/Footer";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { WelcomeCover } from "@/components/marketing/WelcomeCover";
@@ -58,17 +59,19 @@ export default function EventoPage() {
 
                 <div className="relative z-10 flex max-w-7xl flex-col items-center gap-12 w-full">
 
-                    {/* Título Principal */}
+                    {/* Simulador Button */}
                     <div className="flex flex-col items-center gap-6 text-center">
-                        <div className="flex items-center gap-3">
-                            <div className="h-[2px] w-12 bg-brand-yellow" />
-                            <h1 className="text-4xl md:text-6xl font-black tracking-wider text-brand-yellow uppercase font-display">
-                                O EVENTO
-                            </h1>
-                            <div className="h-[2px] w-12 bg-brand-yellow" />
-                        </div>
+                        <Link
+                            href="/simulador"
+                            className="group relative inline-flex items-center justify-center px-8 py-6 bg-brand-yellow overflow-hidden transition-transform hover:scale-105"
+                        >
+                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                            <span className="relative font-black text-2xl md:text-4xl text-black uppercase tracking-widest">
+                                SIMULADOR DO DESAFIO
+                            </span>
+                        </Link>
                         <p className="text-xl md:text-2xl text-zinc-300 max-w-3xl">
-                            Prepare-se para a experiência mais extrema da sua vida
+                            Teste suas habilidades agora mesmo
                         </p>
                     </div>
 
