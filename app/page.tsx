@@ -5,6 +5,7 @@ import { ShareButton } from "@/components/marketing/ShareButton";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { ParticipantsCarousel } from "@/components/marketing/ParticipantsCarousel";
 import { Footer } from "@/components/ui/Footer";
+import { Header } from "@/components/ui/Header";
 import { StickyWhatsAppButton } from "@/components/marketing/StickyWhatsAppButton";
 import { Sponsors } from "@/components/marketing/Sponsors";
 import { SubscribePopup } from "@/components/marketing/SubscribePopup";
@@ -12,6 +13,7 @@ import { SubscribePopup } from "@/components/marketing/SubscribePopup";
 export default function Home() {
   return (
     <div className="min-h-screen bg-brand-dark text-white selection:bg-brand-yellow selection:text-black font-sans overflow-x-hidden">
+      <Header />
       <TacticalMapBackground />
 
       {/* Hero Section */}

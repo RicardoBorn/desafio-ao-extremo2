@@ -8,7 +8,11 @@ export function DevNavigation() {
 
     const pages = [
         { href: "/", label: "HOME", color: "bg-brand-yellow text-black hover:bg-yellow-500" },
+        { href: "/videos", label: "VÍDEOS", color: "bg-zinc-700 text-white hover:bg-zinc-600" },
         { href: "/evento", label: "EVENTO", color: "bg-zinc-700 text-white hover:bg-zinc-600" },
+        { href: "/apoio", label: "APOIO", color: "bg-zinc-700 text-white hover:bg-zinc-600" },
+        { href: "/desafio", label: "DESAFIO", color: "bg-zinc-700 text-white hover:bg-zinc-600" },
+        { href: "/arquivos", label: "ARQUIVOS", color: "bg-zinc-700 text-white hover:bg-zinc-600" },
         { href: "/admin", label: "ADMIN", color: "bg-zinc-700 text-white hover:bg-zinc-600" },
     ];
 

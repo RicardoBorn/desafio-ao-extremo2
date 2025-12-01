@@ -1,0 +1,13 @@
+# Desafio ao Extremo - Robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://desafioaoextremo.com.br/sitemap.xml
+
+# Disallow admin pages
+Disallow: /admin/
+
+# Crawl-delay
+Crawl-delay: 1

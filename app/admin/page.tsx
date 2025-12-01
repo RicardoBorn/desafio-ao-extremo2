@@ -1,13 +1,13 @@
 "use client";
 
-import { DevNavigation } from "@/components/dev/DevNavigation";
+
 import { Footer } from "@/components/ui/Footer";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 
 export default function AdminPage() {
     return (
         <div className="min-h-screen bg-brand-dark text-white selection:bg-brand-yellow selection:text-black font-sans overflow-x-hidden">
-            <DevNavigation />
+
             <TacticalMapBackground />
 
             {/* Hero Section */}

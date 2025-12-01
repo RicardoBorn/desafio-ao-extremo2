@@ -19,3 +19,35 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-yellow-white {
+
+  0%,
+  100% {
+    color: #FFC107;
+  }
+
+  50% {
+    color: #ffffff;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-text {
+  animation: pulse-yellow-white 3s ease-in-out infinite;
+}
