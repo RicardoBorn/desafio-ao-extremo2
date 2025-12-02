@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Teko, Rajdhani } from "next/font/google";
+import { Teko, Rajdhani, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 
 const teko = Teko({
@@ -12,6 +12,12 @@ const rajdhani = Rajdhani({
   variable: "--font-rajdhani",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const bebas = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -83,13 +89,6 @@ export const metadata: Metadata = {
     apple: "/icon.png",
   },
   manifest: "/manifest.json",
-  themeColor: "#FFC107",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-    userScalable: true,
-  },
   verification: {
     google: "google-site-verification-code", // Substituir pelo código real
   },
@@ -102,6 +101,15 @@ export const metadata: Metadata = {
   category: "entertainment",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: "#FFC107",
+};
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -111,7 +119,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body
         suppressHydrationWarning
-        className={`${teko.variable} ${rajdhani.variable} font-sans antialiased bg-black text-white`}
+        className={`${teko.variable} ${rajdhani.variable} ${bebas.variable} font-sans antialiased bg-black text-white`}
       >
         {children}
       </body>

@@ -25,7 +25,7 @@ export default function SimulatorPage() {
 
     // Game Constants
     const MAX_THROWS = 9;
-    const BEST_THROWS_COUNT = 6;
+    const THROWS_TO_COUNT = 6;
 
     // Refs
     const containerRef = useRef<HTMLDivElement>(null);
@@ -93,11 +93,11 @@ export default function SimulatorPage() {
         const dy = y - 50;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Scoring zones (approximate percentages)
-        if (distance < 5) return 10; // Bullseye
-        if (distance < 15) return 7;
-        if (distance < 25) return 5;
-        if (distance < 35) return 3;
+        // Scoring zones (shrunk -5px)
+        if (distance < 9) return 7; // Blue Center
+        if (distance < 20) return 5; // Yellow Ring
+        if (distance < 32) return 3; // Red Ring
+        return 0; // Miss
         return 0;
     };
 
@@ -128,7 +128,7 @@ export default function SimulatorPage() {
 
     const getFinalScore = () => {
         const sortedScores = [...throws].map(t => t.score).sort((a, b) => b - a);
-        return sortedScores.slice(0, BEST_THROWS_COUNT).reduce((a, b) => a + b, 0);
+        return sortedScores.slice(0, THROWS_TO_COUNT).reduce((a, b) => a + b, 0);
     };
 
     return (
@@ -178,7 +178,7 @@ export default function SimulatorPage() {
                 <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
                     <video
                         ref={videoRef}
-                        src="/videos/aceitar o desafio.mp4"
+                        src="/videos/000 simulação desafio.mp4"
                         autoPlay
                         onEnded={handleVideoEnd}
                         className="w-full h-full object-cover"
@@ -306,7 +306,7 @@ export default function SimulatorPage() {
                             <p className="text-8xl font-black text-brand-yellow">
                                 {getFinalScore()}
                             </p>
-                            <p className="text-xs text-zinc-500 mt-2">(SOMA DOS 6 MELHORES ARREMESSOS)</p>
+                            <p className="text-xs text-zinc-500 mt-2">(SOMA DOS {THROWS_TO_COUNT} MELHORES ARREMESSOS)</p>
                         </div>
 
                         <p className="text-xl text-zinc-300 mb-8 max-w-lg mx-auto">
@@ -321,14 +321,95 @@ export default function SimulatorPage() {
                                 VOLTAR AO EVENTO
                             </Link>
                             <button
-                                onClick={() => {
-                                    setGameState("INTRO");
-                                    setThrows([]);
-                                    setCurrentThrow(0);
+                                onClick={async () => {
+                                    try {
+                                        const score = getFinalScore();
+
+                                        // Create canvas
+                                        const canvas = document.createElement('canvas');
+                                        const ctx = canvas.getContext('2d');
+                                        if (!ctx) {
+                                            alert('Erro ao criar canvas.');
+                                            return;
+                                        }
+
+                                        // Load template image
+                                        const templateImg = new window.Image();
+                                        templateImg.crossOrigin = 'anonymous';
+
+                                        templateImg.onload = () => {
+                                            // Set canvas size to match template
+                                            canvas.width = templateImg.width;
+                                            canvas.height = templateImg.height;
+
+                                            // Draw template
+                                            ctx.drawImage(templateImg, 0, 0);
+
+                                            // Configure text style
+                                            ctx.fillStyle = 'rgba(0, 0, 0, 0.9)'; // Preto 90%
+                                            ctx.textAlign = 'center';
+
+                                            // Draw NAME in larger white rectangle
+                                            // Position: centered, lowered a bit more
+                                            ctx.font = 'bold italic 60px "Bebas Neue", Arial, sans-serif';
+                                            ctx.fillText(userName.toUpperCase(), canvas.width / 2, 520);
+
+                                            // Draw SCORE in smaller white rectangle
+                                            // Position: centered, lowered a bit more
+                                            ctx.font = 'bold italic 160px "Bebas Neue", Arial, sans-serif';
+                                            ctx.fillText(score.toString(), canvas.width / 2, 720);
+
+                                            // Convert to blob and share/download
+                                            canvas.toBlob(async (blob) => {
+                                                if (!blob) {
+                                                    alert('Erro ao gerar imagem.');
+                                                    return;
+                                                }
+
+                                                const fileName = `desafio_${userName}_${score}pts.png`;
+
+                                                // Try native share API (mobile)
+                                                if (typeof navigator !== 'undefined' && navigator.share) {
+                                                    try {
+                                                        const file = new File([blob], fileName, { type: 'image/png' });
+                                                        await navigator.share({
+                                                            files: [file],
+                                                            title: 'Desafio ao Extremo',
+                                                            text: `${userName} fez ${score} pontos no Desafio ao Extremo!`
+                                                        });
+                                                        return;
+                                                    } catch {
+                                                        console.log('Share cancelled or not supported');
+                                                    }
+                                                }
+
+                                                // Fallback: Download image
+                                                const url = URL.createObjectURL(blob);
+                                                const a = document.createElement('a');
+                                                a.href = url;
+                                                a.download = fileName;
+                                                document.body.appendChild(a);
+                                                a.click();
+                                                document.body.removeChild(a);
+                                                URL.revokeObjectURL(url);
+
+                                                alert('✅ Imagem salva! Compartilhe no WhatsApp ou redes sociais.');
+                                            }, 'image/png');
+                                        };
+
+                                        templateImg.onerror = () => {
+                                            alert('Erro ao carregar template. Tente novamente.');
+                                        };
+
+                                        templateImg.src = '/simulator/share-template.png';
+                                    } catch (error) {
+                                        console.error('Error sharing:', error);
+                                        alert('Erro ao compartilhar. Tente novamente.');
+                                    }
                                 }}
-                                className="px-8 py-4 border-2 border-white text-white font-bold text-xl hover:bg-white hover:text-black transition-colors"
+                                className="px-8 py-4 border-2 border-brand-yellow text-brand-yellow font-bold text-xl hover:bg-brand-yellow hover:text-black transition-colors"
                             >
-                                TENTAR NOVAMENTE
+                                COMPARTILHAR
                             </button>
                         </div>
                     </div>
