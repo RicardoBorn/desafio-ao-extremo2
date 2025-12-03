@@ -3,41 +3,51 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-const images = [
-    "/participant-1.png",
-    "/participant-2.png",
-    "/participant-3.png",
-    "/participant-4.png",
-    "/participant-5.png",
-    "/participant-6.png",
-    "/participant-7.png",
-    "/participant-8.png",
-    "/participant-9.png",
-];
+import { getParticipants, type Participant } from "@/lib/rankingStorage";
 
 export function ParticipantsCarousel() {
     const [startIndex, setStartIndex] = useState(0);
+    const [participants, setParticipants] = useState<Participant[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setStartIndex((prev) => (prev + 1) % images.length);
-        }, 6000); // Slower: 6 seconds
-        return () => clearInterval(timer);
+        const data = getParticipants();
+        setParticipants(data);
+        setIsLoading(false);
     }, []);
 
+    useEffect(() => {
+        if (participants.length === 0) return;
+
+        const timer = setInterval(() => {
+            setStartIndex((prev) => (prev + 1) % participants.length);
+        }, 6000); // Slower: 6 seconds
+        return () => clearInterval(timer);
+    }, [participants.length]);
+
     const handleNext = () => {
-        setStartIndex((prev) => (prev + 1) % images.length);
+        if (participants.length === 0) return;
+        setStartIndex((prev) => (prev + 1) % participants.length);
     };
 
     const handlePrev = () => {
-        setStartIndex((prev) => (prev - 1 + images.length) % images.length);
+        if (participants.length === 0) return;
+        setStartIndex((prev) => (prev - 1 + participants.length) % participants.length);
     };
 
+    if (isLoading || participants.length === 0) {
+        return null; // Don't show carousel if loading or no participants
+    }
+
     // Get 5 consecutive images starting from startIndex
+    // Handle case where we have fewer than 5 participants by repeating
     const visibleImages = Array.from({ length: 5 }, (_, i) => {
-        const index = (startIndex + i) % images.length;
-        return { src: images[index], position: i };
+        const index = (startIndex + i) % participants.length;
+        return {
+            src: participants[index].imageUrl,
+            id: participants[index].id,
+            position: i
+        };
     });
 
     // Scale factors: edges smallest, center largest
@@ -80,9 +90,9 @@ export function ParticipantsCarousel() {
             {/* Carousel Container */}
             <div className="relative flex items-center justify-center gap-4 md:gap-6 overflow-hidden px-16">
                 <AnimatePresence mode="popLayout">
-                    {visibleImages.map(({ src, position }) => (
+                    {visibleImages.map(({ src, id, position }) => (
                         <motion.div
-                            key={`${src}-${startIndex}`}
+                            key={`${id}-${startIndex}-${position}`}
                             className="relative bg-zinc-900 shadow-2xl overflow-hidden"
                             style={{
                                 width: `${120 * getScale(position)}px`,
