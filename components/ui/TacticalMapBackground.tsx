@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 export function TacticalMapBackground() {
-    const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+    // Use lazy initializer to avoid hydration issues and lint warnings
+    const [windowSize, setWindowSize] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return { width: window.innerWidth, height: window.innerHeight };
+        }
+        return { width: 0, height: 0 };
+    });
 
     // Mouse position values
     const mouseX = useMotionValue(0);
@@ -21,11 +27,6 @@ export function TacticalMapBackground() {
     const y = useTransform(springY, [0, windowSize.height], [20, -20]);
 
     useEffect(() => {
-        // Set initial window size
-        setWindowSize({
-            width: window.innerWidth,
-            height: window.innerHeight,
-        });
 
         const handleResize = () => {
             setWindowSize({

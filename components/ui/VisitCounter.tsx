@@ -20,7 +20,9 @@ export function VisitCounter({ pageKey, variant = "default" }: VisitCounterProps
         localStorage.setItem(pageKey, newCount.toString());
 
         // Update state
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Required for SSR hydration
         setCount(newCount);
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Required for SSR hydration
         setIsLoaded(true);
     }, [pageKey]);
 

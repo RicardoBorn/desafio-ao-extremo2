@@ -9,10 +9,12 @@ interface ViewCounterProps {
 
 export function ViewCounter({ pageId, variant = "tactical" }: ViewCounterProps) {
     const [views, setViews] = useState<number>(0);
-    const [isClient, setIsClient] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setIsClient(true);
+        // Mark as mounted and handle view counting
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- Required for SSR hydration
+        setMounted(true);
 
         // Get current count from localStorage
         const storageKey = `views_${pageId}`;
@@ -24,7 +26,7 @@ export function ViewCounter({ pageId, variant = "tactical" }: ViewCounterProps) 
         setViews(newViews);
     }, [pageId]);
 
-    if (!isClient) {
+    if (!mounted) {
         return null; // Avoid hydration mismatch
     }
 
