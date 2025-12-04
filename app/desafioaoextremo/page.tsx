@@ -1,11 +1,26 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { Bell, Users, Play } from "lucide-react";
 import Image from "next/image";
+import { getVideoSettings, extractVideoId, DEFAULT_VIDEOS, type VideoSettings } from "@/lib/videoSettings";
+
 export default function AberturaPage() {
-    const videoId = "f76ydcJxBKg"; // Placeholder
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+    const [videos, setVideos] = useState<VideoSettings>(DEFAULT_VIDEOS);
+
+    useEffect(() => {
+        const loadVideos = async () => {
+            const data = await getVideoSettings();
+            setVideos(data);
+        };
+        loadVideos();
+    }, []);
+
+    const videoId = extractVideoId(videos.desafio_main.url);
+    const embedUrl = videoId
+        ? `https://www.youtube.com/embed/${videoId}?controls=0&showinfo=0&rel=0&autoplay=1&mute=1&loop=1&playlist=${videoId}`
+        : '';
 
     return (
         <main className="min-h-screen bg-black text-white relative overflow-hidden flex flex-col items-center justify-center py-20 px-4">
@@ -53,11 +68,14 @@ export default function AberturaPage() {
                 <div className="relative w-full aspect-video max-w-4xl mx-auto rounded-2xl overflow-hidden border-2 border-zinc-800 shadow-2xl group mt-8">
                     {/* Video Background (Muted/Loop) */}
                     <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-700">
-                        <iframe
-                            src={embedUrl}
-                            className="w-full h-full object-cover pointer-events-none scale-125"
-                            allow="autoplay; encrypted-media"
-                        />
+                        {embedUrl && (
+                            <iframe
+                                src={embedUrl}
+                                className="w-full h-full object-cover pointer-events-none scale-125"
+                                allow="autoplay; encrypted-media"
+                                title={videos.desafio_main.title}
+                            />
+                        )}
                     </div>
 
                     {/* Overlay Content */}
@@ -66,7 +84,7 @@ export default function AberturaPage() {
                             <Play className="w-8 h-8 text-brand-yellow fill-current ml-1" />
                         </div>
                         <h3 className="text-3xl font-bold text-white uppercase tracking-widest mb-2">
-                            Trailer Oficial
+                            {videos.desafio_main.title}
                         </h3>
                         <p className="text-zinc-300 font-mono text-sm">
                             EM BREVE

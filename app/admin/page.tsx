@@ -5,6 +5,7 @@ import { Footer } from "@/components/ui/Footer";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { RankingAdmin } from "@/components/admin/RankingAdmin";
 import { VisitorStatsAdmin } from "@/components/admin/VisitorStatsAdmin";
+import { VideoAdmin } from "@/components/admin/VideoAdmin";
 
 export default function AdminPage() {
     return (
@@ -34,6 +35,9 @@ export default function AdminPage() {
 
                     {/* Ranking Admin Component */}
                     <RankingAdmin />
+
+                    {/* Video Management Component */}
+                    <VideoAdmin />
 
                 </div>
             </section>

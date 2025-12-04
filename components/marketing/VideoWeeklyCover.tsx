@@ -1,10 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { getVideoSettings, extractVideoId, DEFAULT_VIDEOS, type VideoSettings } from "@/lib/videoSettings";
+
 export function VideoWeeklyCover() {
-    // Converter link do YouTube para embed
-    // https://youtu.be/f76ydcJxBKg?si=IXA4EbYd9c9Zsqp_ -> https://www.youtube.com/embed/f76ydcJxBKg
-    const videoId = "f76ydcJxBKg";
-    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+    const [videos, setVideos] = useState<VideoSettings>(DEFAULT_VIDEOS);
+
+    useEffect(() => {
+        const loadVideos = async () => {
+            const data = await getVideoSettings();
+            setVideos(data);
+        };
+        loadVideos();
+    }, []);
+
+    const getMainEmbedUrl = () => {
+        const id = extractVideoId(videos.weekly_main.url);
+        return id ? `https://www.youtube.com/embed/${id}` : '';
+    };
+
+    const getEmbedUrl = (key: keyof VideoSettings) => {
+        const id = extractVideoId(videos[key].url);
+        return id ? `https://www.youtube.com/embed/${id}` : '';
+    };
 
     return (
         <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-24 overflow-hidden">
@@ -50,8 +68,8 @@ export function VideoWeeklyCover() {
                         {/* Container do vídeo com aspect ratio 16:9 */}
                         <div className="relative aspect-video w-full overflow-hidden border-4 border-brand-yellow">
                             <iframe
-                                src={embedUrl}
-                                title="Vídeo da Semana"
+                                src={getMainEmbedUrl()}
+                                title={videos.weekly_main.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                                 className="absolute inset-0 w-full h-full"
@@ -69,15 +87,15 @@ export function VideoWeeklyCover() {
                     <div className="flex flex-col gap-3">
                         <div className="relative aspect-video w-full overflow-hidden border-2 border-brand-yellow/50 hover:border-brand-yellow transition-colors">
                             <iframe
-                                src={embedUrl}
-                                title="Destaque 1"
+                                src={getEmbedUrl('weekly_1')}
+                                title={videos.weekly_1.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                                 className="absolute inset-0 w-full h-full"
                             />
                         </div>
                         <p className="text-white text-sm text-center font-medium">
-                            Desafio da Semana #1 - João Silva
+                            {videos.weekly_1.title}
                         </p>
                     </div>
 
@@ -85,15 +103,15 @@ export function VideoWeeklyCover() {
                     <div className="flex flex-col gap-3">
                         <div className="relative aspect-video w-full overflow-hidden border-2 border-brand-yellow/50 hover:border-brand-yellow transition-colors">
                             <iframe
-                                src={embedUrl}
-                                title="Destaque 2"
+                                src={getEmbedUrl('weekly_2')}
+                                title={videos.weekly_2.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                                 className="absolute inset-0 w-full h-full"
                             />
                         </div>
                         <p className="text-white text-sm text-center font-medium">
-                            Superação Extrema - Maria Santos
+                            {videos.weekly_2.title}
                         </p>
                     </div>
 
@@ -101,15 +119,15 @@ export function VideoWeeklyCover() {
                     <div className="flex flex-col gap-3">
                         <div className="relative aspect-video w-full overflow-hidden border-2 border-brand-yellow/50 hover:border-brand-yellow transition-colors">
                             <iframe
-                                src={embedUrl}
-                                title="Destaque 3"
+                                src={getEmbedUrl('weekly_3')}
+                                title={videos.weekly_3.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                                 className="absolute inset-0 w-full h-full"
                             />
                         </div>
                         <p className="text-white text-sm text-center font-medium">
-                            Treinamento Tático - Pedro Costa
+                            {videos.weekly_3.title}
                         </p>
                     </div>
 
@@ -117,15 +135,15 @@ export function VideoWeeklyCover() {
                     <div className="flex flex-col gap-3">
                         <div className="relative aspect-video w-full overflow-hidden border-2 border-brand-yellow/50 hover:border-brand-yellow transition-colors">
                             <iframe
-                                src={embedUrl}
-                                title="Destaque 4"
+                                src={getEmbedUrl('weekly_4')}
+                                title={videos.weekly_4.title}
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                                 className="absolute inset-0 w-full h-full"
                             />
                         </div>
                         <p className="text-white text-sm text-center font-medium">
-                            Sobrevivência na Selva - Ana Lima
+                            {videos.weekly_4.title}
                         </p>
                     </div>
                 </div>
