@@ -12,6 +12,7 @@ import { ProductsSection } from "@/components/marketing/ProductsSection";
 import { ExpandableAudioPlayer } from "@/components/media/ExpandableAudioPlayer";
 import { Track } from "@/components/media/AudioPlayer";
 import { VideoWeeklyCover } from "@/components/marketing/VideoWeeklyCover";
+import { VisitorStatsEvento } from "@/components/marketing/VisitorStatsEvento";
 
 const tracks: Track[] = [
     {
@@ -90,6 +91,9 @@ export default function EventoPage() {
                             <RankingCard />
                         </div>
                     </div>
+
+                    {/* Visitor Statistics */}
+                    <VisitorStatsEvento />
 
                 </div>
             </section>
