@@ -1,5 +1,18 @@
 // Ranking Storage Library - Desafio ao Extremo
-// Manages participant data with localStorage persistence
+// Manages participant data with Firestore persistence
+
+import {
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    query,
+    orderBy,
+    Timestamp
+} from 'firebase/firestore';
+import { db } from './firebase';
 
 export interface Participant {
     id: string;
@@ -7,108 +20,100 @@ export interface Participant {
     channel: string;
     score: number;
     imageUrl: string;
+    createdAt?: Date;
 }
 
-const STORAGE_KEY = 'desafio-ranking-data';
+const COLLECTION_NAME = 'participants';
 const MAX_PARTICIPANTS = 40;
 
-// Initialize with default data (current top 3)
-const DEFAULT_PARTICIPANTS: Participant[] = [];
-
 // Get all participants sorted by score (highest first)
-export function getParticipants(): Participant[] {
-    if (typeof window === 'undefined') return [];
-
+export async function getParticipants(): Promise<Participant[]> {
     try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) {
-            // Initialize with default data on first load
-            initializeDefaultData();
-            return DEFAULT_PARTICIPANTS;
-        }
+        const participantsRef = collection(db, COLLECTION_NAME);
+        const q = query(participantsRef, orderBy('score', 'desc'));
+        const querySnapshot = await getDocs(q);
 
-        const participants: Participant[] = JSON.parse(stored);
-        return participants.sort((a, b) => b.score - a.score);
+        const participants: Participant[] = [];
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            participants.push({
+                id: doc.id,
+                name: data.name,
+                channel: data.channel,
+                score: data.score,
+                imageUrl: data.imageUrl,
+                createdAt: data.createdAt?.toDate()
+            });
+        });
+
+        return participants;
     } catch (error) {
-        console.error('Error loading participants:', error);
+        console.error('Error loading participants from Firestore:', error);
         return [];
     }
 }
 
 // Add new participant
-export function addParticipant(participant: Omit<Participant, 'id'>): { success: boolean; message: string } {
+export async function addParticipant(participant: Omit<Participant, 'id'>): Promise<{ success: boolean; message: string }> {
     try {
-        const participants = getParticipants();
+        const participants = await getParticipants();
 
         if (participants.length >= MAX_PARTICIPANTS) {
             return { success: false, message: `Limite de ${MAX_PARTICIPANTS} participantes atingido!` };
         }
 
-        const newParticipant: Participant = {
+        const participantsRef = collection(db, COLLECTION_NAME);
+        await addDoc(participantsRef, {
             ...participant,
-            id: Date.now().toString()
-        };
-
-        participants.push(newParticipant);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(participants));
+            createdAt: Timestamp.now()
+        });
 
         return { success: true, message: 'Participante adicionado com sucesso!' };
     } catch (error) {
-        console.error('Error adding participant:', error);
+        console.error('Error adding participant to Firestore:', error);
         return { success: false, message: 'Erro ao adicionar participante.' };
     }
 }
 
 // Update existing participant
-export function updateParticipant(id: string, updatedData: Omit<Participant, 'id'>): { success: boolean; message: string } {
+export async function updateParticipant(id: string, updatedData: Omit<Participant, 'id'>): Promise<{ success: boolean; message: string }> {
     try {
-        const participants = getParticipants();
-        const index = participants.findIndex(p => p.id === id);
-
-        if (index === -1) {
-            return { success: false, message: 'Participante não encontrado.' };
-        }
-
-        participants[index] = { ...updatedData, id };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(participants));
+        const participantRef = doc(db, COLLECTION_NAME, id);
+        await updateDoc(participantRef, {
+            name: updatedData.name,
+            channel: updatedData.channel,
+            score: updatedData.score,
+            imageUrl: updatedData.imageUrl
+        });
 
         return { success: true, message: 'Participante atualizado com sucesso!' };
     } catch (error) {
-        console.error('Error updating participant:', error);
+        console.error('Error updating participant in Firestore:', error);
         return { success: false, message: 'Erro ao atualizar participante.' };
     }
 }
 
 // Delete participant
-export function deleteParticipant(id: string): { success: boolean; message: string } {
+export async function deleteParticipant(id: string): Promise<{ success: boolean; message: string }> {
     try {
-        const participants = getParticipants();
-        const filtered = participants.filter(p => p.id !== id);
+        const participantRef = doc(db, COLLECTION_NAME, id);
+        await deleteDoc(participantRef);
 
-        if (filtered.length === participants.length) {
-            return { success: false, message: 'Participante não encontrado.' };
-        }
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
         return { success: true, message: 'Participante removido com sucesso!' };
     } catch (error) {
-        console.error('Error deleting participant:', error);
+        console.error('Error deleting participant from Firestore:', error);
         return { success: false, message: 'Erro ao remover participante.' };
     }
 }
 
-// Initialize with default data
-export function initializeDefaultData(): void {
-    if (typeof window === 'undefined') return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_PARTICIPANTS));
-}
-
 // Get participant count
-export function getParticipantCount(): number {
-    return getParticipants().length;
+export async function getParticipantCount(): Promise<number> {
+    const participants = await getParticipants();
+    return participants.length;
 }
 
 // Check if can add more participants
-export function canAddParticipant(): boolean {
-    return getParticipantCount() < MAX_PARTICIPANTS;
+export async function canAddParticipant(): Promise<boolean> {
+    const count = await getParticipantCount();
+    return count < MAX_PARTICIPANTS;
 }

@@ -9,9 +9,12 @@ export function RankingCard() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const data = getParticipants();
-        setRankingData(data);
-        setIsLoading(false);
+        const loadData = async () => {
+            const data = await getParticipants();
+            setRankingData(data);
+            setIsLoading(false);
+        };
+        loadData();
     }, []);
 
     if (isLoading) {

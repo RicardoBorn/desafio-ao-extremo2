@@ -11,9 +11,12 @@ export function ParticipantsCarousel() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const data = getParticipants();
-        setParticipants(data);
-        setIsLoading(false);
+        const loadData = async () => {
+            const data = await getParticipants();
+            setParticipants(data);
+            setIsLoading(false);
+        };
+        loadData();
     }, []);
 
     useEffect(() => {

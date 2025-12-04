@@ -29,18 +29,18 @@ export function RankingAdmin() {
     const [editingId, setEditingId] = useState<string | null>(null);
     const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-    // Load participants on mount
-    useEffect(() => {
-        const data = getParticipants();
-        setParticipants(data);
-    }, []);
-
-    const loadParticipants = () => {
-        const data = getParticipants();
+    const loadParticipants = async () => {
+        const data = await getParticipants();
         setParticipants(data);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    // Load participants on mount
+    useEffect(() => {
+        // eslint-disable-next-line
+        loadParticipants();
+    }, []);
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         // Validation
@@ -57,21 +57,22 @@ export function RankingAdmin() {
         let result;
         if (editingId) {
             // Update existing
-            result = updateParticipant(editingId, formData);
+            result = await updateParticipant(editingId, formData);
         } else {
             // Add new
-            if (!canAddParticipant()) {
+            const canAdd = await canAddParticipant();
+            if (!canAdd) {
                 setMessage({ type: "error", text: "Limite de 40 participantes atingido!" });
                 return;
             }
-            result = addParticipant(formData);
+            result = await addParticipant(formData);
         }
 
         setMessage({ type: result.success ? "success" : "error", text: result.message });
 
         if (result.success) {
             resetForm();
-            loadParticipants();
+            await loadParticipants();
         }
     };
 
@@ -86,11 +87,11 @@ export function RankingAdmin() {
         setMessage(null);
     };
 
-    const handleDelete = (id: string) => {
+    const handleDelete = async (id: string) => {
         if (confirm("Tem certeza que deseja excluir este participante?")) {
-            const result = deleteParticipant(id);
+            const result = await deleteParticipant(id);
             setMessage({ type: result.success ? "success" : "error", text: result.message });
-            loadParticipants();
+            await loadParticipants();
         }
     };
 
