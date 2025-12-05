@@ -119,9 +119,10 @@ export default function EventoPage() {
 
 
             {/* Materiais Exclusivos Section */}
-            < section className="relative flex min-h-screen flex-col items-center justify-start px-4 py-12 md:py-24" >
+            <section className="relative flex min-h-screen flex-col items-center justify-start px-4 py-12 md:py-24">
                 {/* Angled Decorative Elements */}
-                < div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brand-yellow/5 to-transparent -skew-y-2 transform origin-top-left" />
+                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-brand-yellow/5 to-transparent -skew-y-2 transform origin-top-left" />
+
 
                 <div className="relative z-10 flex max-w-7xl flex-col items-center gap-12 w-full">
 
