@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Teko, Rajdhani, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import { StickyBettingButton } from "@/components/ui/StickyBettingButton";
+
 
 const teko = Teko({
   variable: "--font-teko",
@@ -121,6 +123,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${teko.variable} ${rajdhani.variable} ${bebas.variable} font-sans antialiased bg-black text-white`}
       >
+        <StickyBettingButton />
         {children}
       </body>
     </html>
