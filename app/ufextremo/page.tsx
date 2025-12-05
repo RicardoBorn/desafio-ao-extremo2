@@ -58,6 +58,15 @@ export default function UFExtremoPage() {
                     </p>
                 </div>
 
+                {/* Decorative Divider */}
+                <div className="flex items-center gap-4 mb-12">
+                    <div className="flex-1 h-[2px] bg-gradient-to-r from-transparent via-brand-yellow to-transparent"></div>
+                    <span className="text-brand-yellow font-black text-xl tracking-widest uppercase">
+                        CARDS AO EXTREMO
+                    </span>
+                    <div className="flex-1 h-[2px] bg-gradient-to-r from-transparent via-brand-yellow to-transparent"></div>
+                </div>
+
                 {/* Grid de Apostas */}
                 {isLoading ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
