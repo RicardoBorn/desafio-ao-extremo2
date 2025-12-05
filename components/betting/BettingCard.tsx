@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Participant } from "@/lib/rankingStorage";
 import { getParticipantStats, placeBet, type ParticipantStats } from "@/lib/betting";
-import { Trophy, TrendingUp, Users } from "lucide-react";
+import { TrendingUp, Users } from "lucide-react";
 
 interface BettingCardProps {
     participant: Participant;
@@ -14,18 +14,21 @@ export function BettingCard({ participant }: BettingCardProps) {
     const [stats, setStats] = useState<ParticipantStats>({ totalBets: 0, averageScore: 0 });
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userName, setUserName] = useState("");
-    const [score, setScore] = useState(50);
+    const [score, setScore] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [hasBet, setHasBet] = useState(false);
 
-    useEffect(() => {
-        loadStats();
-    }, [participant.id]);
+    const validScores = [0, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42];
 
     const loadStats = async () => {
         const data = await getParticipantStats(participant.id);
         setStats(data);
     };
+
+    useEffect(() => {
+        loadStats();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [participant.id]);
 
     const handleBet = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -51,9 +54,9 @@ export function BettingCard({ participant }: BettingCardProps) {
 
     return (
         <>
-            <div className="relative group bg-zinc-900/80 border-2 border-zinc-800 hover:border-brand-yellow/50 transition-all duration-300 overflow-hidden rounded-xl">
-                {/* Header com Foto */}
-                <div className="relative h-48 w-full overflow-hidden">
+            <div className="relative group bg-zinc-900/80 border-2 border-zinc-800 hover:border-brand-yellow/50 transition-all duration-300 overflow-hidden">
+                {/* Header com Foto - Mais alto e cantos retos */}
+                <div className="relative h-64 w-full overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent z-10" />
                     <Image
                         src={participant.imageUrl || "/placeholder-user.jpg"}
@@ -74,14 +77,14 @@ export function BettingCard({ participant }: BettingCardProps) {
                 {/* Stats da Torcida */}
                 <div className="p-4 space-y-4">
                     <div className="grid grid-cols-2 gap-2 text-center">
-                        <div className="bg-black/40 p-2 rounded border border-zinc-800">
+                        <div className="bg-black/40 p-2 border border-zinc-800">
                             <div className="flex items-center justify-center gap-1 text-zinc-400 text-xs mb-1">
                                 <Users className="w-3 h-3" />
                                 <span>APOSTAS</span>
                             </div>
                             <span className="text-xl font-black text-white">{stats.totalBets}</span>
                         </div>
-                        <div className="bg-black/40 p-2 rounded border border-zinc-800">
+                        <div className="bg-black/40 p-2 border border-zinc-800">
                             <div className="flex items-center justify-center gap-1 text-zinc-400 text-xs mb-1">
                                 <TrendingUp className="w-3 h-3" />
                                 <span>MÉDIA</span>
@@ -137,23 +140,20 @@ export function BettingCard({ participant }: BettingCardProps) {
                             </div>
 
                             <div>
-                                <div className="flex justify-between mb-2">
-                                    <label className="text-xs font-bold text-zinc-500 uppercase">Nota Prevista</label>
-                                    <span className="text-2xl font-black text-brand-yellow">{score}</span>
-                                </div>
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="100"
+                                <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Nota Prevista</label>
+                                <select
                                     value={score}
                                     onChange={(e) => setScore(Number(e.target.value))}
-                                    className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-brand-yellow"
-                                />
-                                <div className="flex justify-between text-xs text-zinc-600 mt-1 font-mono">
-                                    <span>0</span>
-                                    <span>50</span>
-                                    <span>100</span>
-                                </div>
+                                    className="w-full bg-black border border-zinc-700 p-3 text-white focus:border-brand-yellow outline-none font-bold uppercase appearance-none"
+                                >
+                                    {validScores.map((s) => (
+                                        <option key={s} value={s}>{s} PONTOS</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="bg-brand-yellow/10 border border-brand-yellow/20 p-3 text-xs text-brand-yellow/80 font-mono">
+                                ⚠️ Atenção: Esta é uma aposta recreativa e simbólica. Não envolve dinheiro real e serve apenas como incentivo e torcida para os desafiados.
                             </div>
 
                             <button
