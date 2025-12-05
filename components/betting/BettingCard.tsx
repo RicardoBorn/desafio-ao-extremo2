@@ -141,16 +141,81 @@ export function BettingCard({ participant }: BettingCardProps) {
 
                             <div>
                                 <label className="block text-xs font-bold text-zinc-500 uppercase mb-2">Nota Prevista</label>
-                                <select
-                                    value={score}
-                                    onChange={(e) => setScore(Number(e.target.value))}
-                                    className="w-full bg-black border border-zinc-700 p-3 text-white focus:border-brand-yellow outline-none font-bold uppercase appearance-none"
-                                >
-                                    {validScores.map((s) => (
-                                        <option key={s} value={s}>{s} PONTOS</option>
-                                    ))}
-                                </select>
+
+                                {/* Risk Zone Display */}
+                                <div className="mb-4 p-4 border-2 transition-all duration-300" style={{
+                                    borderColor: score <= 15 ? '#22c55e' : score <= 30 ? '#eab308' : '#ef4444',
+                                    backgroundColor: score <= 15 ? 'rgba(34, 197, 94, 0.1)' : score <= 30 ? 'rgba(234, 179, 8, 0.1)' : 'rgba(239, 68, 68, 0.1)'
+                                }}>
+                                    <div className="text-center">
+                                        <div className="text-5xl font-black mb-2" style={{
+                                            color: score <= 15 ? '#22c55e' : score <= 30 ? '#eab308' : '#ef4444'
+                                        }}>
+                                            {score}
+                                        </div>
+                                        <div className="text-sm font-bold uppercase tracking-wider" style={{
+                                            color: score <= 15 ? '#22c55e' : score <= 30 ? '#eab308' : '#ef4444'
+                                        }}>
+                                            {score <= 15 ? '🛡️ Jogando Seguro' : score <= 30 ? '⚖️ Apostando Médio' : '🔥 Arriscando Tudo!'}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Slider with gradient background */}
+                                <div className="relative">
+                                    <div className="absolute inset-0 h-3 rounded-full" style={{
+                                        background: 'linear-gradient(to right, #22c55e 0%, #22c55e 35%, #eab308 35%, #eab308 70%, #ef4444 70%, #ef4444 100%)'
+                                    }}></div>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="42"
+                                        value={score}
+                                        onChange={(e) => {
+                                            const value = Number(e.target.value);
+                                            // Snap to nearest valid score
+                                            const nearest = validScores.reduce((prev, curr) =>
+                                                Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev
+                                            );
+                                            setScore(nearest);
+                                        }}
+                                        className="relative w-full h-3 appearance-none cursor-pointer bg-transparent z-10"
+                                        style={{
+                                            WebkitAppearance: 'none',
+                                        }}
+                                    />
+                                </div>
+
+                                {/* Zone Labels */}
+                                <div className="flex justify-between text-xs font-bold mt-2 px-1">
+                                    <span className="text-green-500">SEGURO</span>
+                                    <span className="text-yellow-500">MÉDIO</span>
+                                    <span className="text-red-500">EXTREMO</span>
+                                </div>
                             </div>
+
+                            <style jsx>{`
+                                input[type="range"]::-webkit-slider-thumb {
+                                    -webkit-appearance: none;
+                                    appearance: none;
+                                    width: 24px;
+                                    height: 24px;
+                                    border-radius: 50%;
+                                    background: white;
+                                    border: 3px solid ${score <= 15 ? '#22c55e' : score <= 30 ? '#eab308' : '#ef4444'};
+                                    cursor: pointer;
+                                    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                                }
+                                input[type="range"]::-moz-range-thumb {
+                                    width: 24px;
+                                    height: 24px;
+                                    border-radius: 50%;
+                                    background: white;
+                                    border: 3px solid ${score <= 15 ? '#22c55e' : score <= 30 ? '#eab308' : '#ef4444'};
+                                    cursor: pointer;
+                                    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                                }
+                            `}</style>
 
                             <div className="bg-brand-yellow/10 border border-brand-yellow/20 p-3 text-xs text-brand-yellow/80 font-mono">
                                 ⚠️ Atenção: Esta é uma aposta recreativa e simbólica. Não envolve dinheiro real e serve apenas como incentivo e torcida para os desafiados.
