@@ -182,7 +182,7 @@ export function RankingAdmin() {
                                         src={formData.imageUrl}
                                         alt="Preview"
                                         fill
-                                        className="object-cover"
+                                        className="object-cover object-top"
                                         onError={() => setMessage({ type: "error", text: "Erro ao carregar imagem. Verifique se é um link direto." })}
                                     />
                                 </div>
@@ -246,7 +246,7 @@ export function RankingAdmin() {
                                             {index + 1}º
                                         </div>
                                         <div className="relative w-12 h-12 border border-zinc-600">
-                                            <Image src={participant.imageUrl} alt={participant.name} fill className="object-cover" />
+                                            <Image src={participant.imageUrl} alt={participant.name} fill className="object-cover object-top" />
                                         </div>
                                         <div className="flex-1">
                                             <div className="font-bold text-white text-sm">{participant.name}</div>

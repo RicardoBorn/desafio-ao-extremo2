@@ -59,14 +59,14 @@ export function BettingCard({ participant }: BettingCardProps) {
                         src={participant.imageUrl || "/placeholder-user.jpg"}
                         alt={participant.name}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="object-cover object-top group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute bottom-0 left-0 w-full p-4 z-20">
                         <h3 className="text-xl font-black text-white uppercase italic tracking-wider truncate">
                             {participant.name}
                         </h3>
                         <p className="text-brand-yellow text-xs font-bold uppercase">
-                            GUERREIRO
+                            DESAFIADO
                         </p>
                     </div>
                 </div>

@@ -138,7 +138,7 @@ export function ParticipantsCarousel() {
                                         src={src}
                                         alt={`${name} - Participante`}
                                         fill
-                                        className="object-cover"
+                                        className="object-cover object-top"
                                         sizes="200px"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
