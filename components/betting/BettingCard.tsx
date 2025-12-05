@@ -136,6 +136,8 @@ export function BettingCard({ participant }: BettingCardProps) {
                                     onChange={(e) => setUserName(e.target.value)}
                                     className="w-full bg-black border border-zinc-700 p-3 text-white focus:border-brand-yellow outline-none font-bold uppercase"
                                     placeholder="DIGITE SEU NOME"
+                                    autoComplete="off"
+                                    name="bettor-name"
                                 />
                             </div>
 
