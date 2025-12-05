@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { BettingCard } from "@/components/betting/BettingCard";
 import { getParticipants, type Participant } from "@/lib/rankingStorage";
-import { Trophy, Flame } from "lucide-react";
+import { getParticipantStats } from "@/lib/betting";
+import { Flame } from "lucide-react";
 
 export default function UFExtremoPage() {
     const [participants, setParticipants] = useState<Participant[]>([]);
@@ -13,8 +14,20 @@ export default function UFExtremoPage() {
     useEffect(() => {
         const loadData = async () => {
             const data = await getParticipants();
-            // Filter only active participants if needed, for now show all
-            setParticipants(data);
+
+            // Get bet stats for each participant and sort by total bets
+            const participantsWithStats = await Promise.all(
+                data.map(async (participant) => {
+                    const stats = await getParticipantStats(participant.id);
+                    return { participant, totalBets: stats.totalBets };
+                })
+            );
+
+            // Sort by total bets (descending)
+            participantsWithStats.sort((a, b) => b.totalBets - a.totalBets);
+
+            // Extract just the participants
+            setParticipants(participantsWithStats.map(item => item.participant));
             setIsLoading(false);
         };
         loadData();
