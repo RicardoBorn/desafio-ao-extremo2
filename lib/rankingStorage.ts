@@ -69,9 +69,9 @@ export async function addParticipant(participant: Omit<Participant, 'id'>): Prom
         });
 
         return { success: true, message: 'Participante adicionado com sucesso!' };
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error adding participant to Firestore:', error);
-        return { success: false, message: 'Erro ao adicionar participante.' };
+        return { success: false, message: `Erro ao adicionar: ${error.message || 'Erro desconhecido'}` };
     }
 }
 
@@ -87,9 +87,9 @@ export async function updateParticipant(id: string, updatedData: Omit<Participan
         });
 
         return { success: true, message: 'Participante atualizado com sucesso!' };
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error updating participant in Firestore:', error);
-        return { success: false, message: 'Erro ao atualizar participante.' };
+        return { success: false, message: `Erro ao atualizar: ${error.message || 'Erro desconhecido'}` };
     }
 }
 
@@ -100,9 +100,9 @@ export async function deleteParticipant(id: string): Promise<{ success: boolean;
         await deleteDoc(participantRef);
 
         return { success: true, message: 'Participante removido com sucesso!' };
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error deleting participant from Firestore:', error);
-        return { success: false, message: 'Erro ao remover participante.' };
+        return { success: false, message: `Erro ao remover: ${error.message || 'Erro desconhecido'}` };
     }
 }
 

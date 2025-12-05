@@ -3,7 +3,6 @@
 import { Footer } from "@/components/ui/Footer";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { RankingAdmin } from "@/components/admin/RankingAdmin";
-import { VisitorStatsAdmin } from "@/components/admin/VisitorStatsAdmin";
 import { VideoAdmin } from "@/components/admin/VideoAdmin";
 
 export default function AdminPage() {
@@ -28,9 +27,6 @@ export default function AdminPage() {
                     <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl text-center">
                         Gerenciamento do Ranking - Desafio ao Extremo
                     </p>
-
-                    {/* Visitor Statistics */}
-                    <VisitorStatsAdmin />
 
                     {/* Ranking Admin Component */}
                     <RankingAdmin />
