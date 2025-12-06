@@ -1,5 +1,5 @@
 "use client";
-// Sticky Betting Button Component - Vercel Deploy Trigger
+// Sticky Betting Button Component - Vercel Deploy Trigger v2
 
 import { motion } from "framer-motion";
 import { useState } from "react";
