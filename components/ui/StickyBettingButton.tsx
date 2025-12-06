@@ -10,7 +10,7 @@ export function StickyBettingButton() {
 
     return (
         <motion.div
-            className="fixed right-0 top-1/2 -translate-y-1/2 z-50"
+            className="fixed right-0 top-1/2 -translate-y-1/2 z-[9999]"
             initial={{ x: 100 }}
             animate={{ x: 0 }}
             transition={{ delay: 1, type: "spring", stiffness: 100 }}
@@ -23,7 +23,7 @@ export function StickyBettingButton() {
                 onClick={() => setIsExpanded(!isExpanded)}
             >
                 <motion.div
-                    className="relative bg-brand-yellow text-black shadow-[0_0_30px_rgba(255,193,7,0.7)] border-l-4 border-yellow-500 cursor-pointer overflow-hidden"
+                    className="relative bg-[#FFC107] text-black shadow-[0_0_30px_rgba(255,193,7,0.7)] border-l-4 border-[#e6ac00] cursor-pointer overflow-hidden"
                     animate={{
                         width: isExpanded ? "280px" : "60px",
                         borderRadius: isExpanded ? "12px 0 0 12px" : "12px 0 0 12px",
@@ -33,7 +33,7 @@ export function StickyBettingButton() {
                     {/* Pulsing effect when collapsed */}
                     {!isExpanded && (
                         <motion.div
-                            className="absolute inset-0 bg-yellow-400"
+                            className="absolute inset-0 bg-[#FFD54F]"
                             animate={{ opacity: [0.5, 0.8, 0.5] }}
                             transition={{ duration: 2, repeat: Infinity }}
                         />
