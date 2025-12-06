@@ -12,6 +12,7 @@ import { ProductsSection } from "@/components/marketing/ProductsSection";
 import { ExpandableAudioPlayer } from "@/components/media/ExpandableAudioPlayer";
 import { Track } from "@/components/media/AudioPlayer";
 import { VideoWeeklyCover } from "@/components/marketing/VideoWeeklyCover";
+import { StickyBettingButton } from "@/components/ui/StickyBettingButton";
 
 
 const tracks: Track[] = [
@@ -44,6 +45,7 @@ const tracks: Track[] = [
 export default function EventoPage() {
     return (
         <div className="min-h-screen bg-brand-dark text-white selection:bg-brand-yellow selection:text-black font-sans overflow-x-hidden">
+            <StickyBettingButton />
             <Header />
             <TacticalMapBackground />
 
