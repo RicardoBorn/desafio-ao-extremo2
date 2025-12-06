@@ -46,6 +46,7 @@ export default function EventoPage() {
     return (
         <div className="min-h-screen bg-brand-dark text-white selection:bg-brand-yellow selection:text-black font-sans overflow-x-hidden">
             <StickyBettingButton />
+            <div className="fixed right-0 top-1/2 -translate-y-1/2 bg-red-600 text-white p-2 z-50">TEST BUTTON</div>
             <Header />
             <TacticalMapBackground />
 
