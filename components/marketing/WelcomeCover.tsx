@@ -86,21 +86,7 @@ export function WelcomeCover() {
                         </motion.div>
                     </motion.div>
 
-                    {/* Botão Apostar */}
-                    <motion.a
-                        href="#ranking"
-                        className="flex justify-center pt-4"
-                        whileTap={{ scale: 0.95 }}
-                        whileHover={{ scale: 1.05 }}
-                    >
-                        <div className="group relative inline-flex items-center justify-center px-8 py-4 bg-red-600 overflow-hidden transition-transform border-2 border-red-500 shadow-[0_0_30px_rgba(220,38,38,0.5)] animate-pulse hover:animate-none">
-                            <div className="absolute inset-0 bg-black/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                            <span className="relative font-black text-xl md:text-2xl text-white uppercase tracking-widest text-center flex flex-col items-center leading-none">
-                                <span>QUEM VAI VENCER?</span>
-                                <span className="text-xs md:text-sm font-bold text-red-200 mt-1 normal-case tracking-normal">Dê seu palpite agora!</span>
-                            </span>
-                        </div>
-                    </motion.a>
+
                 </div>
 
                 {/* Imagem Direita com Parallax */}

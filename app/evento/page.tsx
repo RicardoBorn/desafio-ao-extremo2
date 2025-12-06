@@ -84,12 +84,12 @@ export default function EventoPage() {
                         {/* Apostar Button */}
                         <Link
                             href="#ranking"
-                            className="w-full group relative inline-flex items-center justify-center px-8 py-6 bg-red-600 overflow-hidden transition-transform hover:scale-105 animate-pulse hover:animate-none border-2 border-red-500 shadow-[0_0_30px_rgba(220,38,38,0.5)]"
+                            className="w-full group relative inline-flex items-center justify-center px-8 py-6 bg-brand-yellow overflow-hidden transition-transform hover:scale-105 animate-pulse hover:animate-none border-2 border-brand-yellow shadow-[0_0_30px_rgba(255,193,7,0.5)]"
                         >
-                            <div className="absolute inset-0 bg-black/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                            <span className="relative font-black text-xl md:text-3xl text-white uppercase tracking-widest text-center flex flex-col items-center leading-none">
+                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                            <span className="relative font-black text-xl md:text-3xl text-black uppercase tracking-widest text-center flex flex-col items-center leading-none">
                                 <span>QUEM VAI VENCER?</span>
-                                <span className="text-sm md:text-base font-bold text-red-200 mt-1 normal-case tracking-normal">Dê seu palpite agora!</span>
+                                <span className="text-sm md:text-base font-bold text-zinc-800 mt-1 normal-case tracking-normal">Dê seu palpite agora!</span>
                             </span>
                         </Link>
 

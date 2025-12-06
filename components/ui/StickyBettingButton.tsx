@@ -22,7 +22,7 @@ export function StickyBettingButton() {
                 onClick={() => setIsExpanded(!isExpanded)}
             >
                 <motion.div
-                    className="relative bg-red-600 text-white shadow-[0_0_30px_rgba(220,38,38,0.7)] border-l-4 border-red-500 cursor-pointer overflow-hidden"
+                    className="relative bg-brand-yellow text-black shadow-[0_0_30px_rgba(255,193,7,0.7)] border-l-4 border-yellow-500 cursor-pointer overflow-hidden"
                     animate={{
                         width: isExpanded ? "280px" : "60px",
                         borderRadius: isExpanded ? "12px 0 0 12px" : "12px 0 0 12px",
@@ -32,7 +32,7 @@ export function StickyBettingButton() {
                     {/* Pulsing effect when collapsed */}
                     {!isExpanded && (
                         <motion.div
-                            className="absolute inset-0 bg-red-500"
+                            className="absolute inset-0 bg-yellow-400"
                             animate={{ opacity: [0.5, 0.8, 0.5] }}
                             transition={{ duration: 2, repeat: Infinity }}
                         />
@@ -58,7 +58,7 @@ export function StickyBettingButton() {
                             <div className="font-black text-sm uppercase tracking-wide">
                                 Quem Vai Vencer?
                             </div>
-                            <div className="text-xs text-red-200 font-semibold">
+                            <div className="text-xs text-zinc-800 font-bold">
                                 Dê seu palpite!
                             </div>
                         </motion.div>
