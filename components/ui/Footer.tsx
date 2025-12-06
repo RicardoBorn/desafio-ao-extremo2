@@ -121,7 +121,7 @@ export function Footer() {
                         © 2025 Desafio ao Extremo. Todos os direitos reservados.
                     </p>
                     <p className="text-zinc-600 text-xs mt-2">
-                        Desenvolvido com 🔥 para os verdadeiros guerreiros
+                        Desenvolvido com 🔥 para os verdadeiros guerreiros <span className="text-zinc-800 ml-2">v2.1 (DEBUG)</span>
                     </p>
                 </div>
             </div>
