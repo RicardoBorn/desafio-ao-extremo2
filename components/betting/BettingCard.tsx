@@ -56,7 +56,7 @@ export function BettingCard({ participant }: BettingCardProps) {
         <>
             <div className="relative group bg-zinc-900/80 border-2 border-zinc-800 hover:border-brand-yellow/50 transition-all duration-300 overflow-hidden">
                 {/* Header com Foto - Mais alto e cantos retos */}
-                <div className="relative h-64 w-full overflow-hidden">
+                <div className="relative h-80 w-full overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent z-10" />
                     <Image
                         src={participant.imageUrl || "/placeholder-user.jpg"}
@@ -69,7 +69,7 @@ export function BettingCard({ participant }: BettingCardProps) {
                             {participant.name}
                         </h3>
                         <p className="text-brand-yellow text-xs font-bold uppercase">
-                            DESAFIADO
+                            {participant.channel}
                         </p>
                     </div>
                 </div>
