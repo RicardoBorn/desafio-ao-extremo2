@@ -178,7 +178,7 @@ export default function SimulatorPage() {
                 <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
                     <video
                         ref={videoRef}
-                        src="/videos/000 simulação desafio.mp4"
+                        src="https://drive.google.com/uc?export=download&id=1W2xM1fKfmFzOO44dBS289kFg_x7vtV19"
                         autoPlay
                         onEnded={handleVideoEnd}
                         className="w-full h-full object-cover"

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
+import { Header } from "@/components/ui/Header";
 import { BettingCard } from "@/components/betting/BettingCard";
 import { getParticipants, type Participant } from "@/lib/rankingStorage";
 import { getParticipantStats } from "@/lib/betting";
@@ -35,6 +36,7 @@ export default function UFExtremoPage() {
 
     return (
         <main className="min-h-screen bg-black text-white relative overflow-hidden">
+            <Header />
             <TacticalMapBackground />
 
             <div className="relative z-10 container mx-auto px-4 py-24">

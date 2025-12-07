@@ -85,7 +85,7 @@ export default function ApoioPage() {
     // Download Video
     const downloadVideo = () => {
         const link = document.createElement('a');
-        link.href = "/videos/aceitar o desafio.mp4";
+        link.href = "https://drive.google.com/uc?export=download&id=1jOCxtgM9N4_xDl6rFzqhgTa9CVEgzCzJ";
         link.download = "aceitar-o-desafio.mp4";
         document.body.appendChild(link);
         link.click();
@@ -144,7 +144,7 @@ export default function ApoioPage() {
                             <video
                                 ref={videoRef}
                                 className="w-full h-full object-contain"
-                                src="/videos/aceitar o desafio.mp4"
+                                src="https://drive.google.com/uc?export=download&id=1jOCxtgM9N4_xDl6rFzqhgTa9CVEgzCzJ"
                                 controls={false}
                                 onClick={togglePlay}
                             />
@@ -234,9 +234,7 @@ export default function ApoioPage() {
                     playsInline
                     preload="auto"
                 >
-                    {/* SUBSTITUA O SRC PELO SEU VÍDEO */}
-                    <source src="/videos/aceitar o desafio.mp4" type="video/mp4" />
-                    <source src="/videos/apoio-video.webm" type="video/webm" />
+                    <source src="https://drive.google.com/uc?export=download&id=1jOCxtgM9N4_xDl6rFzqhgTa9CVEgzCzJ" type="video/mp4" />
                     Seu navegador não suporta vídeo HTML5.
                 </video>
 
