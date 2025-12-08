@@ -27,7 +27,7 @@ export function AudioPlayer({ tracks }: AudioPlayerProps) {
     const currentTrack = tracks[currentTrackIndex]
 
     useEffect(() => {
-        if (audioRef.current) {
+        if (audioRef.current && currentTrack) {
             if (isPlaying) {
                 const playPromise = audioRef.current.play()
                 if (playPromise !== undefined) {
@@ -41,7 +41,21 @@ export function AudioPlayer({ tracks }: AudioPlayerProps) {
                 audioRef.current.pause()
             }
         }
-    }, [isPlaying, currentTrackIndex])
+    }, [isPlaying, currentTrackIndex, currentTrack])
+
+    // Handle empty tracks array
+    if (!tracks || tracks.length === 0) {
+        return (
+            <div className="bg-zinc-900 border border-zinc-800 p-8 text-center">
+                <p className="text-zinc-400 text-lg">
+                    🎵 Nenhuma música disponível no momento.
+                </p>
+                <p className="text-zinc-500 text-sm mt-2">
+                    As músicas oficiais serão adicionadas em breve!
+                </p>
+            </div>
+        )
+    }
 
     const togglePlay = () => {
         setIsPlaying(!isPlaying)
