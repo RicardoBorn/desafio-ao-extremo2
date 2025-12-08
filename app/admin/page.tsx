@@ -4,7 +4,6 @@ import { Footer } from "@/components/ui/Footer";
 import { TacticalMapBackground } from "@/components/ui/TacticalMapBackground";
 import { RankingAdmin } from "@/components/admin/RankingAdmin";
 import { VideoAdmin } from "@/components/admin/VideoAdmin";
-import { AudioAdmin } from "@/components/admin/AudioAdmin";
 
 export default function AdminPage() {
     return (
@@ -28,9 +27,6 @@ export default function AdminPage() {
                     <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl text-center">
                         Gerenciamento Completo - Desafio ao Extremo
                     </p>
-
-                    {/* Audio Management Component */}
-                    <AudioAdmin />
 
                     {/* Ranking Admin Component */}
                     <RankingAdmin />

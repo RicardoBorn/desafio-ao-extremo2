@@ -9,15 +9,9 @@ import { Sponsors } from "@/components/marketing/Sponsors";
 import { VideoSchedule } from "@/components/marketing/VideoSchedule";
 import { RankingCard } from "@/components/marketing/RankingCard";
 import { ProductsSection } from "@/components/marketing/ProductsSection";
-import { ExpandableAudioPlayer } from "@/components/media/ExpandableAudioPlayer";
-import { Track } from "@/components/media/AudioPlayer";
+import { SpotifyPlayer } from "@/components/media/SpotifyPlayer";
 import { VideoWeeklyCover } from "@/components/marketing/VideoWeeklyCover";
 import { StickyBettingButton } from "@/components/ui/StickyBettingButton";
-
-
-const tracks: Track[] = [
-    // Adicione as músicas aqui após fazer upload no /admin
-];
 
 
 export default function EventoPage() {
@@ -121,9 +115,9 @@ export default function EventoPage() {
                             </p>
                         </div>
 
-                        {/* Player de Áudio Expansível */}
+                        {/* Spotify Player */}
                         <div className="w-full">
-                            <ExpandableAudioPlayer tracks={tracks} />
+                            <SpotifyPlayer showId="6KLyPd3iGMn9TfT3WbV231" />
                         </div>
 
                     </div>
