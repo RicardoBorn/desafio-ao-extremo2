@@ -9,10 +9,24 @@ import { Sponsors } from "@/components/marketing/Sponsors";
 import { VideoSchedule } from "@/components/marketing/VideoSchedule";
 import { RankingCard } from "@/components/marketing/RankingCard";
 import { ProductsSection } from "@/components/marketing/ProductsSection";
-import { SpotifyPlayer } from "@/components/media/SpotifyPlayer";
+import { ExpandableAudioPlayer } from "@/components/media/ExpandableAudioPlayer";
+import { Track } from "@/components/media/AudioPlayer";
 import { VideoWeeklyCover } from "@/components/marketing/VideoWeeklyCover";
 import { StickyBettingButton } from "@/components/ui/StickyBettingButton";
 
+// Músicas hospedadas no Google Drive
+// Para adicionar mais músicas: pegue o ID do arquivo e adicione aqui
+const tracks: Track[] = [
+    {
+        id: "1",
+        title: "Música 1 - Desafio ao Extremo",
+        duration: "03:00",
+        url: "https://drive.google.com/uc?export=download&id=1iGrhIV_xMURJ3UuiJNKJi52OgpvfeyKz",
+        albumArt: "/audio/album.png"
+    },
+    // Adicione mais músicas aqui seguindo o mesmo formato
+    // Para pegar o ID: abra o arquivo no Drive, o ID está na URL entre /d/ e /view
+];
 
 export default function EventoPage() {
     return (
@@ -115,9 +129,9 @@ export default function EventoPage() {
                             </p>
                         </div>
 
-                        {/* Spotify Player */}
+                        {/* Player de Áudio */}
                         <div className="w-full">
-                            <SpotifyPlayer showId="6KLyPd3iGMn9TfT3WbV231" />
+                            <ExpandableAudioPlayer tracks={tracks} />
                         </div>
 
                     </div>
