@@ -88,17 +88,16 @@ export default function SimulatorPage() {
 
     const calculateScore = (x: number, y: number) => {
         // Calculate distance from center (50, 50)
-        // Adjust for aspect ratio if needed, but assuming square target area helps
         const dx = x - 50;
         const dy = y - 50;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Scoring zones (shrunk -5px)
-        if (distance < 9) return 7; // Blue Center
-        if (distance < 20) return 5; // Yellow Ring
-        if (distance < 32) return 3; // Red Ring
+        // Scoring zones adjusted to match visual target rings
+        // These values are percentages of the screen, calibrated to match the colored rings
+        if (distance < 12) return 7;   // Blue Center (larger)
+        if (distance < 22) return 5;   // Yellow Ring (larger)
+        if (distance < 35) return 3;   // Red Ring (much larger)
         return 0; // Miss
-        return 0;
     };
 
     const handleThrow = () => {
@@ -152,6 +151,7 @@ export default function SimulatorPage() {
                                 value={userName}
                                 onChange={(e) => setUserName(e.target.value)}
                                 placeholder="DIGITE SEU NOME"
+                                autoComplete="off"
                                 className="w-full bg-black border-2 border-white/30 p-4 text-xl font-bold text-white focus:border-brand-yellow outline-none uppercase"
                             />
                         </div>
@@ -211,6 +211,18 @@ export default function SimulatorPage() {
                         </div>
                     </div>
 
+                    {/* Player Name in Top Region Above Target */}
+                    <div className="absolute top-[12%] left-1/2 -translate-x-1/2 z-30 pointer-events-none w-[600px] px-8">
+                        <h2 className="text-center font-black text-brand-yellow uppercase italic tracking-wider drop-shadow-[0_0_30px_rgba(255,204,0,0.9)]"
+                            style={{
+                                fontFamily: '"Bebas Neue", sans-serif',
+                                fontSize: 'clamp(1rem, 4vw, 3rem)',
+                                lineHeight: '1',
+                            }}>
+                            {userName}
+                        </h2>
+                    </div>
+
                     {/* Target */}
                     <div className="relative w-[600px] h-[600px] select-none pointer-events-none">
                         <Image
@@ -241,6 +253,9 @@ export default function SimulatorPage() {
                             </div>
                         ))}
                     </div>
+
+
+
 
                     {/* Hit Score Popup */}
                     {showHitScore !== null && (
@@ -283,138 +298,141 @@ export default function SimulatorPage() {
                         </div>
                     )}
                 </div>
-            )}
+            )
+            }
 
             {/* RESULT STATE */}
-            {gameState === "RESULT" && (
-                <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-black text-center cursor-default">
-                    <div className="max-w-2xl w-full animate-in fade-in zoom-in duration-500">
-                        <Image
-                            src="/simulator/mission-complete.png"
-                            alt="MISSÃO CUMPRIDA"
-                            width={600}
-                            height={150}
-                            className="w-full h-auto mb-8"
-                        />
+            {
+                gameState === "RESULT" && (
+                    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-black text-center cursor-default">
+                        <div className="max-w-2xl w-full animate-in fade-in zoom-in duration-500">
+                            <Image
+                                src="/simulator/mission-complete.png"
+                                alt="MISSÃO CUMPRIDA"
+                                width={600}
+                                height={150}
+                                className="w-full h-auto mb-8"
+                            />
 
-                        <h2 className="text-3xl font-bold text-white mb-4">
-                            PARABÉNS, {userName}!
-                        </h2>
+                            <h2 className="text-3xl font-bold text-white mb-4">
+                                PARABÉNS, {userName}!
+                            </h2>
 
-                        <div className="bg-white/10 border-2 border-brand-yellow p-8 mb-8">
-                            <p className="text-sm text-zinc-400 mb-2">SUA PONTUAÇÃO FINAL</p>
-                            <p className="text-8xl font-black text-brand-yellow">
-                                {getFinalScore()}
+                            <div className="bg-white/10 border-2 border-brand-yellow p-8 mb-8">
+                                <p className="text-sm text-zinc-400 mb-2">SUA PONTUAÇÃO FINAL</p>
+                                <p className="text-8xl font-black text-brand-yellow">
+                                    {getFinalScore()}
+                                </p>
+                                <p className="text-xs text-zinc-500 mt-2">(SOMA DOS {THROWS_TO_COUNT} MELHORES ARREMESSOS)</p>
+                            </div>
+
+                            <p className="text-xl text-zinc-300 mb-8 max-w-lg mx-auto">
+                                Essa foi sua pontuação! Confira o ranking oficial e veja em que posição você ficou.
                             </p>
-                            <p className="text-xs text-zinc-500 mt-2">(SOMA DOS {THROWS_TO_COUNT} MELHORES ARREMESSOS)</p>
-                        </div>
 
-                        <p className="text-xl text-zinc-300 mb-8 max-w-lg mx-auto">
-                            Essa foi sua pontuação! Confira o ranking oficial e veja em que posição você ficou.
-                        </p>
+                            <div className="flex gap-4 justify-center">
+                                <Link
+                                    href="/evento"
+                                    className="px-8 py-4 bg-brand-yellow text-black font-black text-xl hover:scale-105 transition-transform"
+                                >
+                                    VOLTAR AO EVENTO
+                                </Link>
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const score = getFinalScore();
 
-                        <div className="flex gap-4 justify-center">
-                            <Link
-                                href="/evento"
-                                className="px-8 py-4 bg-brand-yellow text-black font-black text-xl hover:scale-105 transition-transform"
-                            >
-                                VOLTAR AO EVENTO
-                            </Link>
-                            <button
-                                onClick={async () => {
-                                    try {
-                                        const score = getFinalScore();
+                                            // Create canvas
+                                            const canvas = document.createElement('canvas');
+                                            const ctx = canvas.getContext('2d');
+                                            if (!ctx) {
+                                                alert('Erro ao criar canvas.');
+                                                return;
+                                            }
 
-                                        // Create canvas
-                                        const canvas = document.createElement('canvas');
-                                        const ctx = canvas.getContext('2d');
-                                        if (!ctx) {
-                                            alert('Erro ao criar canvas.');
-                                            return;
-                                        }
+                                            // Load template image
+                                            const templateImg = new window.Image();
+                                            templateImg.crossOrigin = 'anonymous';
 
-                                        // Load template image
-                                        const templateImg = new window.Image();
-                                        templateImg.crossOrigin = 'anonymous';
+                                            templateImg.onload = () => {
+                                                // Set canvas size to match template
+                                                canvas.width = templateImg.width;
+                                                canvas.height = templateImg.height;
 
-                                        templateImg.onload = () => {
-                                            // Set canvas size to match template
-                                            canvas.width = templateImg.width;
-                                            canvas.height = templateImg.height;
+                                                // Draw template
+                                                ctx.drawImage(templateImg, 0, 0);
 
-                                            // Draw template
-                                            ctx.drawImage(templateImg, 0, 0);
+                                                // Configure text style
+                                                ctx.fillStyle = 'rgba(0, 0, 0, 0.9)'; // Preto 90%
+                                                ctx.textAlign = 'center';
 
-                                            // Configure text style
-                                            ctx.fillStyle = 'rgba(0, 0, 0, 0.9)'; // Preto 90%
-                                            ctx.textAlign = 'center';
+                                                // Draw NAME in larger white rectangle
+                                                // Position: centered, lowered a bit more
+                                                ctx.font = 'bold italic 60px "Bebas Neue", Arial, sans-serif';
+                                                ctx.fillText(userName.toUpperCase(), canvas.width / 2, 520);
 
-                                            // Draw NAME in larger white rectangle
-                                            // Position: centered, lowered a bit more
-                                            ctx.font = 'bold italic 60px "Bebas Neue", Arial, sans-serif';
-                                            ctx.fillText(userName.toUpperCase(), canvas.width / 2, 520);
+                                                // Draw SCORE in smaller white rectangle
+                                                // Position: centered, lowered a bit more
+                                                ctx.font = 'bold italic 160px "Bebas Neue", Arial, sans-serif';
+                                                ctx.fillText(score.toString(), canvas.width / 2, 720);
 
-                                            // Draw SCORE in smaller white rectangle
-                                            // Position: centered, lowered a bit more
-                                            ctx.font = 'bold italic 160px "Bebas Neue", Arial, sans-serif';
-                                            ctx.fillText(score.toString(), canvas.width / 2, 720);
-
-                                            // Convert to blob and share/download
-                                            canvas.toBlob(async (blob) => {
-                                                if (!blob) {
-                                                    alert('Erro ao gerar imagem.');
-                                                    return;
-                                                }
-
-                                                const fileName = `desafio_${userName}_${score}pts.png`;
-
-                                                // Try native share API (mobile)
-                                                if (typeof navigator !== 'undefined' && navigator.share) {
-                                                    try {
-                                                        const file = new File([blob], fileName, { type: 'image/png' });
-                                                        await navigator.share({
-                                                            files: [file],
-                                                            title: 'Desafio ao Extremo',
-                                                            text: `${userName} fez ${score} pontos no Desafio ao Extremo!`
-                                                        });
+                                                // Convert to blob and share/download
+                                                canvas.toBlob(async (blob) => {
+                                                    if (!blob) {
+                                                        alert('Erro ao gerar imagem.');
                                                         return;
-                                                    } catch {
-                                                        console.log('Share cancelled or not supported');
                                                     }
-                                                }
 
-                                                // Fallback: Download image
-                                                const url = URL.createObjectURL(blob);
-                                                const a = document.createElement('a');
-                                                a.href = url;
-                                                a.download = fileName;
-                                                document.body.appendChild(a);
-                                                a.click();
-                                                document.body.removeChild(a);
-                                                URL.revokeObjectURL(url);
+                                                    const fileName = `desafio_${userName}_${score}pts.png`;
 
-                                                alert('✅ Imagem salva! Compartilhe no WhatsApp ou redes sociais.');
-                                            }, 'image/png');
-                                        };
+                                                    // Try native share API (mobile)
+                                                    if (typeof navigator !== 'undefined' && navigator.share) {
+                                                        try {
+                                                            const file = new File([blob], fileName, { type: 'image/png' });
+                                                            await navigator.share({
+                                                                files: [file],
+                                                                title: 'Desafio ao Extremo',
+                                                                text: `${userName} fez ${score} pontos no Desafio ao Extremo!`
+                                                            });
+                                                            return;
+                                                        } catch {
+                                                            console.log('Share cancelled or not supported');
+                                                        }
+                                                    }
 
-                                        templateImg.onerror = () => {
-                                            alert('Erro ao carregar template. Tente novamente.');
-                                        };
+                                                    // Fallback: Download image
+                                                    const url = URL.createObjectURL(blob);
+                                                    const a = document.createElement('a');
+                                                    a.href = url;
+                                                    a.download = fileName;
+                                                    document.body.appendChild(a);
+                                                    a.click();
+                                                    document.body.removeChild(a);
+                                                    URL.revokeObjectURL(url);
 
-                                        templateImg.src = '/simulator/share-template.png';
-                                    } catch (error) {
-                                        console.error('Error sharing:', error);
-                                        alert('Erro ao compartilhar. Tente novamente.');
-                                    }
-                                }}
-                                className="px-8 py-4 border-2 border-brand-yellow text-brand-yellow font-bold text-xl hover:bg-brand-yellow hover:text-black transition-colors"
-                            >
-                                COMPARTILHAR
-                            </button>
+                                                    alert('✅ Imagem salva! Compartilhe no WhatsApp ou redes sociais.');
+                                                }, 'image/png');
+                                            };
+
+                                            templateImg.onerror = () => {
+                                                alert('Erro ao carregar template. Tente novamente.');
+                                            };
+
+                                            templateImg.src = '/simulator/share-template.png';
+                                        } catch (error) {
+                                            console.error('Error sharing:', error);
+                                            alert('Erro ao compartilhar. Tente novamente.');
+                                        }
+                                    }}
+                                    className="px-8 py-4 border-2 border-brand-yellow text-brand-yellow font-bold text-xl hover:bg-brand-yellow hover:text-black transition-colors"
+                                >
+                                    COMPARTILHAR
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 }
