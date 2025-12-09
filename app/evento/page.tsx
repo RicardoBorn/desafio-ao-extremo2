@@ -12,6 +12,7 @@ import { ProductsSection } from "@/components/marketing/ProductsSection";
 import { ElfsightAudioPlayer } from "@/components/media/ElfsightAudioPlayer";
 import { VideoWeeklyCover } from "@/components/marketing/VideoWeeklyCover";
 import { StickyBettingButton } from "@/components/ui/StickyBettingButton";
+import { DonationSection } from "@/components/marketing/DonationSection";
 
 export default function EventoPage() {
     return (
@@ -69,6 +70,9 @@ export default function EventoPage() {
                                 Dê seu palpite no favorito
                             </p>
                         </div>
+
+                        {/* Donation Section */}
+                        <DonationSection />
 
                         {/* Vídeos da Semana */}
                         <div className="w-full">

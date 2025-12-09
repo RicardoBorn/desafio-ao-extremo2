@@ -80,6 +80,23 @@ export function Sponsors() {
                         );
                     })}
                 </div>
+
+                {/* Mensagem de Agradecimento e Incentivo */}
+                <div className="mt-12 text-center max-w-3xl mx-auto">
+                    <div className="bg-zinc-900/30 backdrop-blur-sm border-2 border-zinc-800 p-8 relative overflow-hidden group hover:border-brand-yellow/30 transition-all duration-500">
+                        {/* Decorative corners */}
+                        <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-brand-yellow/20" />
+                        <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-brand-yellow/20" />
+
+                        <p className="text-lg md:text-xl text-zinc-300 leading-relaxed mb-4">
+                            <span className="text-brand-yellow font-bold">Esses parceiros acreditaram no projeto</span> e tornaram tudo isso possível.
+                        </p>
+                        <p className="text-base md:text-lg text-zinc-400 leading-relaxed">
+                            Se você curtiu o conteúdo, <span className="text-white font-semibold">retribua visitando e comprando com eles</span>.
+                            Cada compra fortalece essa comunidade e garante mais desafios épicos! 🔥
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
     );
