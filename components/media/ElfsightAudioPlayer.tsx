@@ -4,11 +4,10 @@ import { useEffect } from "react"
 
 export function ElfsightAudioPlayer() {
     useEffect(() => {
-        // Inject Elfsight script directly into head
+        // Inject Elfsight script from elfsightcdn.com
         const script = document.createElement('script')
-        script.src = 'https://static.elfsight.com/platform/platform.js'
+        script.src = 'https://elfsightcdn.com/platform.js'
         script.async = true
-        script.setAttribute('data-use-service-core', '')
         document.head.appendChild(script)
 
         return () => {
@@ -38,6 +37,7 @@ export function ElfsightAudioPlayer() {
 
             {/* Elfsight Player Container */}
             <div className="bg-zinc-900/30 border-2 border-brand-yellow/20 p-4 md:p-6 rounded-lg">
+                {/* Elfsight Audio Player Widget */}
                 <div className="elfsight-app-f599f813-9d82-44e3-8a56-426c9eca070e" data-elfsight-app-lazy></div>
             </div>
         </div>
