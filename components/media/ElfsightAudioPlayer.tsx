@@ -1,25 +1,16 @@
 "use client"
 
-import { useEffect } from "react"
+import Script from "next/script"
 
 export function ElfsightAudioPlayer() {
-    useEffect(() => {
-        // Load Elfsight script
-        const script = document.createElement('script')
-        script.src = 'https://elfsightcdn.com/platform.js'
-        script.async = true
-        document.body.appendChild(script)
-
-        return () => {
-            // Cleanup script on unmount
-            if (document.body.contains(script)) {
-                document.body.removeChild(script)
-            }
-        }
-    }, [])
-
     return (
         <div className="w-full">
+            {/* Load Elfsight Platform Script */}
+            <Script
+                src="https://static.elfsight.com/platform/platform.js"
+                strategy="lazyOnload"
+            />
+
             {/* Header */}
             <div className="bg-zinc-900/50 border-2 border-brand-yellow/30 p-6 mb-4">
                 <div className="flex items-center gap-4">
