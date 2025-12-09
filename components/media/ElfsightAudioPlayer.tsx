@@ -8,7 +8,7 @@ export function ElfsightAudioPlayer() {
             {/* Load Elfsight Platform Script */}
             <Script
                 src="https://static.elfsight.com/platform/platform.js"
-                strategy="lazyOnload"
+                strategy="afterInteractive"
             />
 
             {/* Header */}
@@ -28,10 +28,7 @@ export function ElfsightAudioPlayer() {
 
             {/* Elfsight Player Container */}
             <div className="bg-zinc-900/30 border-2 border-brand-yellow/20 p-4 md:p-6 rounded-lg">
-                <div
-                    className="elfsight-app-f599f813-9d82-44e3-8a56-426c9eca070e"
-                    data-elfsight-app-lazy
-                />
+                <div className="elfsight-app-f599f813-9d82-44e3-8a56-426c9eca070e" />
             </div>
 
             {/* Custom Styles to match site theme */}
