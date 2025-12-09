@@ -36,10 +36,52 @@ export function ElfsightAudioPlayer() {
                 </div>
             </div>
 
-            {/* Elfsight Player Container */}
-            <div className="bg-zinc-900/30 border-2 border-brand-yellow/20 p-4 md:p-6 rounded-lg">
-                <div className="elfsight-app-f599f813-9d82-44e3-8a56-426c9eca070e" data-elfsight-app-lazy></div>
+            {/* Player + Visualizer Container */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Left: Elfsight Player */}
+                <div className="bg-zinc-900/30 border-2 border-brand-yellow/20 p-4 md:p-6 rounded-lg">
+                    <div className="elfsight-app-f599f813-9d82-44e3-8a56-426c9eca070e" data-elfsight-app-lazy></div>
+                </div>
+
+                {/* Right: Audio Visualizer */}
+                <div className="bg-zinc-900/30 border-2 border-brand-yellow/20 p-4 md:p-6 rounded-lg flex items-center justify-center relative overflow-hidden">
+                    {/* Animated Audio Bars */}
+                    <div className="flex items-end justify-center gap-2 h-64 w-full opacity-60">
+                        {[...Array(32)].map((_, i) => (
+                            <div
+                                key={i}
+                                className="bg-brand-yellow rounded-t-lg transition-all duration-300 ease-in-out"
+                                style={{
+                                    width: '8px',
+                                    height: '20%',
+                                    animation: `audioWave ${0.8 + (i * 0.05)}s ease-in-out infinite alternate`,
+                                    animationDelay: `${i * 0.05}s`
+                                }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Overlay Text */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="text-center">
+                            <div className="text-6xl mb-4">🎧</div>
+                            <p className="text-brand-yellow text-xl font-bold">SOUND WAVES</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            {/* CSS Animation */}
+            <style jsx>{`
+                @keyframes audioWave {
+                    0% {
+                        height: 20%;
+                    }
+                    100% {
+                        height: 80%;
+                    }
+                }
+            `}</style>
         </div>
     )
 }
