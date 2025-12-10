@@ -68,11 +68,11 @@ export function ParticipantsCarousel() {
         };
     });
 
-    // Scale factors: edges smallest, center largest
+    // Scale factors: edges smallest, center largest (increased by 10%)
     const getScale = (position: number) => {
-        if (position === 2) return 1.2; // Center
-        if (position === 1 || position === 3) return 1.1; // Near center
-        return 1.0; // Edges
+        if (position === 2) return 1.32; // Center (was 1.2)
+        if (position === 1 || position === 3) return 1.21; // Near center (was 1.1)
+        return 1.1; // Edges (was 1.0)
     };
 
     const getZIndex = (position: number) => {
