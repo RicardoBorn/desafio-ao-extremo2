@@ -11,10 +11,14 @@ export default function DesafioPage() {
         const video = videoRef.current;
         if (!video) return;
 
+        // Define volume em 100%
+        video.volume = 1.0;
+
         const playVideo = async () => {
             try {
-                // Tenta dar play com som
+                // Garante que o som está ativado e volume em 100%
                 video.muted = false;
+                video.volume = 1.0;
                 await video.play();
 
                 // Tenta fullscreen
