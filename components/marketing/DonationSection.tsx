@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Heart, Zap, Target, TrendingUp } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
+import { trackDonationClick } from "@/lib/analytics";
 
 export function DonationSection() {
     const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
@@ -21,6 +22,7 @@ export function DonationSection() {
         setSelectedAmount(amount);
         setCustomAmount("");
         setShowQRCode(true);
+        trackDonationClick(amount);
     };
 
     const handleCustomAmount = () => {
@@ -28,6 +30,7 @@ export function DonationSection() {
         if (value >= 1) {
             setSelectedAmount(value);
             setShowQRCode(true);
+            trackDonationClick(value);
         }
     };
 

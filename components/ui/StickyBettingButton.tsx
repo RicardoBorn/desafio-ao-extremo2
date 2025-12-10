@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
+import { trackBettingClick } from "@/lib/analytics";
 
 export function StickyBettingButton() {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -24,6 +25,7 @@ export function StickyBettingButton() {
                     className="block"
                     onMouseEnter={() => setIsExpanded(true)}
                     onMouseLeave={() => setIsExpanded(false)}
+                    onClick={() => trackBettingClick("Sticky Button", "Floating Button")}
                 >
                     <motion.div
                         className="relative bg-brand-yellow text-black shadow-2xl cursor-pointer overflow-hidden"

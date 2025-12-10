@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Teko, Rajdhani, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 
 
 const teko = Teko({
@@ -91,7 +93,7 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   verification: {
-    google: "google-site-verification-code", // Substituir pelo código real
+    google: "8dd0e0d7adc01a17", // Código do arquivo google8dd0e0d7adc01a17.html
   },
   appleWebApp: {
     capable: true,
@@ -122,6 +124,9 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${teko.variable} ${rajdhani.variable} ${bebas.variable} font-sans antialiased bg-black text-white`}
       >
+        <GoogleAnalytics />
+        <OrganizationSchema />
+        <WebSiteSchema />
         {children}
       </body>
     </html>

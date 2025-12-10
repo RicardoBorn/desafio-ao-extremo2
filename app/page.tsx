@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { CountdownTimer } from "@/components/marketing/CountdownTimer";
 import { WhatsAppButton } from "@/components/marketing/WhatsAppButton";
 import { ShareButton } from "@/components/marketing/ShareButton";
@@ -8,10 +9,22 @@ import { Footer } from "@/components/ui/Footer";
 import { StickyWhatsAppButton } from "@/components/marketing/StickyWhatsAppButton";
 import { Sponsors } from "@/components/marketing/Sponsors";
 import { SubscribePopup } from "@/components/marketing/SubscribePopup";
+import { EventSchema } from "@/components/seo/StructuredData";
+
+export const metadata: Metadata = {
+  title: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas do Brasil",
+  description: "9 guerreiros, 1 objetivo: vencer o Desafio ao Extremo. A maior competição de arremesso de facas do YouTube Brasil. Estreia 25 de Janeiro de 2026.",
+  openGraph: {
+    title: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas",
+    description: "9 guerreiros competindo pelo título. Estreia 25/01/2026.",
+    images: [{ url: "/logo.png", width: 1200, height: 630 }],
+  },
+};
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-brand-dark text-white selection:bg-brand-yellow selection:text-black font-sans overflow-x-hidden">
+      <EventSchema />
       <TacticalMapBackground />
 
       {/* Hero Section */}
