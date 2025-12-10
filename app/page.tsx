@@ -101,7 +101,7 @@ export default function Home() {
                   <p className="text-xl md:text-2xl font-bold text-white leading-relaxed">
                     Eu desafiei <span className="text-brand-yellow">40 YouTubers</span> para um Desafio <span className="text-brand-yellow font-black">AO EXTREMO</span>.
                     <br />
-                    E a pergunta é simples: <span className="text-brand-yellow">quantos tiveram coragem de aceitar?</span>
+                    E a pergunta é simples: <span className="text-brand-yellow">quantos aceitaram o Desafio?</span>
                   </p>
 
                   <div className="h-[2px] w-24 bg-brand-yellow/50 mx-auto" />
