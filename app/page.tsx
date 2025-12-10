@@ -89,7 +89,68 @@ export default function Home() {
           {/* 6. Carrossel de Participantes */}
           <ParticipantsCarousel />
 
-          {/* 7. Botões (Compartilhar + Grupo VIP) */}
+          {/* 7. Descrição do Evento */}
+          <div className="max-w-4xl mx-auto mt-16 mb-12 px-4">
+            <div className="relative">
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-brand-yellow/30" />
+              <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-brand-yellow/30" />
+
+              <div className="py-12 px-6 md:px-12 bg-zinc-900/30 backdrop-blur-sm border border-zinc-800/50">
+                <div className="space-y-6 text-center">
+                  <p className="text-xl md:text-2xl font-bold text-white leading-relaxed">
+                    Eu desafiei <span className="text-brand-yellow">40 YouTubers</span> para um Desafio <span className="text-brand-yellow font-black">AO EXTREMO</span>.
+                    <br />
+                    E a pergunta é simples: <span className="text-brand-yellow">quantos tiveram coragem de aceitar?</span>
+                  </p>
+
+                  <div className="h-[2px] w-24 bg-brand-yellow/50 mx-auto" />
+
+                  <p className="text-lg md:text-xl text-zinc-300 leading-relaxed">
+                    Pela primeira vez no Brasil, um desafio de arremesso de facas acontece nesse formato.
+                    <br />
+                    A regra parece fácil: <span className="text-white font-semibold">9 arremessos, a 3 metros de distância, mirando um único alvo</span>.
+                    <br />
+                    Mas só os <span className="text-brand-yellow font-bold">6 melhores</span> contam para o placar final.
+                  </p>
+
+                  <p className="text-2xl md:text-3xl font-black text-brand-yellow uppercase tracking-wider">
+                    Fácil? Nem de longe.
+                  </p>
+
+                  <p className="text-lg md:text-xl text-zinc-300 leading-relaxed">
+                    Porque aqui entram a <span className="text-white font-semibold">pressão</span>, as <span className="text-white font-semibold">variáveis</span>, a <span className="text-white font-semibold">técnica</span>, o <span className="text-white font-semibold">psicológico</span>, o <span className="text-white font-semibold">inesperado</span>.
+                    <br />
+                    Cada erro machuca confiança.
+                    <br />
+                    Cada acerto alimenta a vontade de ir além.
+                  </p>
+
+                  <div className="h-[2px] w-24 bg-brand-yellow/50 mx-auto" />
+
+                  <p className="text-lg md:text-xl text-zinc-300 leading-relaxed">
+                    E são <span className="text-brand-yellow font-bold">40 YouTubers</span> — grandes e pequenos — entrando juntos nessa arena digital,
+                    <br />
+                    trazendo <span className="text-white font-semibold">emoção</span>, <span className="text-white font-semibold">superação</span> e <span className="text-white font-semibold">garra</span> para um evento online que promete ser histórico.
+                  </p>
+
+                  <div className="flex flex-col items-center gap-4 mt-8">
+                    <p className="text-2xl md:text-3xl font-black text-white uppercase tracking-wide">
+                      Vai ser <span className="text-brand-yellow">marcante</span>.
+                    </p>
+                    <p className="text-2xl md:text-3xl font-black text-white uppercase tracking-wide">
+                      Vai ser <span className="text-brand-yellow">certeiro</span>.
+                    </p>
+                    <p className="text-3xl md:text-4xl font-black text-brand-yellow uppercase tracking-wider drop-shadow-[0_0_20px_rgba(255,193,7,0.5)]">
+                      Vai ser AO EXTREMO.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 8. Botões (Compartilhar + Grupo VIP) */}
           <div className="flex flex-col items-center gap-6 w-full mt-6">
             <div className="flex items-center gap-2 text-brand-yellow/80 text-sm font-bold uppercase tracking-widest">
               <span className="w-2 h-2 bg-brand-yellow rotate-45" />
