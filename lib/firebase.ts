@@ -1,10 +1,10 @@
 // Firebase Configuration - Desafio ao Extremo
 // This file initializes Firebase and Firestore for the application
 
-import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { getStorage } from 'firebase/storage';
+import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
+import { getFirestore, Firestore } from 'firebase/firestore';
+import { getAuth, Auth } from 'firebase/auth';
+import { getStorage, FirebaseStorage } from 'firebase/storage';
 
 // Firebase configuration from environment variables
 const firebaseConfig = {
@@ -16,16 +16,21 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
-// Initialize Firebase (only once)
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+// Check if Firebase credentials are configured
+const isFirebaseConfigured = firebaseConfig.apiKey && firebaseConfig.projectId;
 
-// Initialize Firestore
-export const db = getFirestore(app);
+// Initialize Firebase (only once and only if configured)
+let app: FirebaseApp | null = null;
+let db: Firestore | null = null;
+let auth: Auth | null = null;
+let storage: FirebaseStorage | null = null;
 
-// Initialize Auth
-export const auth = getAuth(app);
+if (isFirebaseConfigured) {
+    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    db = getFirestore(app);
+    auth = getAuth(app);
+    storage = getStorage(app);
+}
 
-// Initialize Storage
-export const storage = getStorage(app);
-
+export { db, auth, storage };
 export default app;
