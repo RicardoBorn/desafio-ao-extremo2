@@ -61,10 +61,10 @@ export const metadata: Metadata = {
     siteName: "Desafio ao Extremo",
     images: [
       {
-        url: "/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Desafio ao Extremo - Logo",
+        url: "/share-image.png",
+        width: 1024,
+        height: 576,
+        alt: "Desafio ao Extremo - 8 Fevereiro 2026",
       },
     ],
   },
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas do Brasil",
     description: "A maior competição de arremesso de facas do YouTube Brasil. 9 guerreiros, 1 objetivo. Estreia 08/02/2026.",
     creator: "@BornaoExtremo",
-    images: ["/logo.png"],
+    images: ["/share-image.png"],
   },
   robots: {
     index: true,
