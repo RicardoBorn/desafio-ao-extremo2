@@ -12,7 +12,7 @@ export function DonationSection() {
 
     const pixKey = "bornextremo@gmail.com";
     const amounts = [
-        { value: 5, icon: Heart, label: "Guerreiro" },
+        { value: 5, icon: Heart, label: "Desafiado" },
         { value: 10, icon: Zap, label: "Desafiante" },
         { value: 25, icon: TrendingUp, label: "Lendário" },
         { value: 50, icon: Target, label: "Extremo" }

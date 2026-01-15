@@ -12,7 +12,7 @@ export function Footer() {
                         </h3>
                         <div className="text-zinc-400 text-sm leading-relaxed space-y-3">
                             <p>
-                                Os maiores guerreiros do universo outdoor aceitaram o chamado.
+                                Os maiores desafiados do universo outdoor aceitaram o chamado.
                                 Eles vão enfrentar um teste brutal de foco, coragem e habilidade — o <strong className="text-brand-yellow">Desafio ao Extremo!</strong>
                             </p>
                             <p>
@@ -49,7 +49,7 @@ export function Footer() {
                                 href="#participantes"
                                 className="text-zinc-400 hover:text-brand-yellow transition-colors text-sm"
                             >
-                                Guerreiros
+                                Desafiados
                             </Link>
                             <a
                                 href="https://www.youtube.com/@bornaoextremo"
@@ -121,7 +121,7 @@ export function Footer() {
                         © 2025 Desafio ao Extremo. Todos os direitos reservados.
                     </p>
                     <p className="text-zinc-600 text-xs mt-2">
-                        Desenvolvido com 🔥 para os verdadeiros guerreiros <span className="text-zinc-800 ml-2">v2.1 (DEBUG)</span>
+                        Desenvolvido com 🔥 para os verdadeiros desafiados <span className="text-zinc-800 ml-2">v2.1 (DEBUG)</span>
                     </p>
                 </div>
             </div>

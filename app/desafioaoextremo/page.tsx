@@ -112,7 +112,7 @@ export default function AberturaPage() {
 
                 {/* Footer / Social Proof */}
                 <div className="text-zinc-500 text-sm font-mono mt-4">
-                    <span className="text-brand-yellow font-bold">1.248</span> GUERREIROS JÁ ESTÃO ESPERANDO
+                    <span className="text-brand-yellow font-bold">1.248</span> DESAFIADOS JÁ ESTÃO ESPERANDO
                 </div>
 
             </div>

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas do Brasil",
     template: "%s | Desafio ao Extremo"
   },
-  description: "A maior competição de arremesso de facas do YouTube Brasil. 9 guerreiros, 1 objetivo: vencer o Desafio ao Extremo. Estreia 8 de Fevereiro de 2026.",
+  description: "A maior competição de arremesso de facas do YouTube Brasil. 9 desafiados, 1 objetivo: vencer o Desafio ao Extremo. Estreia 22 de Fevereiro de 2026.",
   keywords: [
     "desafio ao extremo",
     "arremesso de facas",
@@ -57,21 +57,21 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: "https://desafioaoextremo.com.br",
     title: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas do Brasil",
-    description: "A maior competição de arremesso de facas do YouTube Brasil. 9 guerreiros, 1 objetivo: vencer o Desafio ao Extremo. Estreia 8 de Fevereiro de 2026.",
+    description: "A maior competição de arremesso de facas do YouTube Brasil. 9 desafiados, 1 objetivo: vencer o Desafio ao Extremo. Estreia 22 de Fevereiro de 2026.",
     siteName: "Desafio ao Extremo",
     images: [
       {
         url: "/share-image.png",
         width: 1024,
         height: 576,
-        alt: "Desafio ao Extremo - 8 Fevereiro 2026",
+        alt: "Desafio ao Extremo - 22 Fevereiro 2026",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas do Brasil",
-    description: "A maior competição de arremesso de facas do YouTube Brasil. 9 guerreiros, 1 objetivo. Estreia 08/02/2026.",
+    description: "A maior competição de arremesso de facas do YouTube Brasil. 9 desafiados, 1 objetivo. Estreia 22/02/2026.",
     creator: "@BornaoExtremo",
     images: ["/share-image.png"],
   },
