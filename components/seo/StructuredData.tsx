@@ -48,8 +48,8 @@ export function EventSchema() {
         '@type': 'SportsEvent',
         name: 'Desafio ao Extremo - Competição de Arremesso de Facas',
         description: 'A maior competição de arremesso de facas do YouTube Brasil. 9 desafiados competindo pelo título de campeão.',
-        startDate: '2026-02-22T19:00:00-03:00',
-        endDate: '2026-02-22T23:00:00-03:00',
+        startDate: '2026-05-31T19:00:00-03:00',
+        endDate: '2026-05-31T23:00:00-03:00',
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
         location: {
@@ -72,7 +72,7 @@ export function EventSchema() {
             price: '0',
             priceCurrency: 'BRL',
             availability: 'https://schema.org/InStock',
-            validFrom: '2026-02-22T00:00:00-03:00',
+            validFrom: '2026-05-31T00:00:00-03:00',
         },
     };
 

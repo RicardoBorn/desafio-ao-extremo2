@@ -13,10 +13,10 @@ import { EventSchema } from "@/components/seo/StructuredData";
 
 export const metadata: Metadata = {
   title: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas do Brasil",
-  description: "9 desafiados, 1 objetivo: vencer o Desafio ao Extremo. A maior competição de arremesso de facas do YouTube Brasil. Estreia 22 de Fevereiro de 2026.",
+  description: "9 desafiados, 1 objetivo: vencer o Desafio ao Extremo. A maior competição de arremesso de facas do YouTube Brasil. Estreia 31 de Maio de 2026.",
   openGraph: {
     title: "Desafio ao Extremo - A Maior Competição de Arremesso de Facas",
-    description: "9 desafiados competindo pelo título. Estreia 22/02/2026.",
+    description: "9 desafiados competindo pelo título. Estreia 31/05/2026.",
     images: [{ url: "/logo.png", width: 1200, height: 630 }],
   },
 };
@@ -67,7 +67,7 @@ export default function Home() {
           <div className="flex items-center justify-center gap-4">
             <div className="h-[2px] w-12 bg-brand-yellow" />
             <h2 className="text-xl md:text-2xl font-bold tracking-[0.2em] text-white uppercase font-sans">
-              22 DE FEVEREIRO DE 2026
+              31 DE MAIO DE 2026
             </h2>
             <div className="h-[2px] w-12 bg-brand-yellow" />
           </div>

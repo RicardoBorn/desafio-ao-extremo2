@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Teko, Rajdhani, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { GoogleAdSense } from "@/components/GoogleAdSense";
 import { OrganizationSchema, WebSiteSchema } from "@/components/seo/StructuredData";
 
 
@@ -125,6 +126,7 @@ export default function RootLayout({
         className={`${teko.variable} ${rajdhani.variable} ${bebas.variable} font-sans antialiased bg-black text-white`}
       >
         <GoogleAnalytics />
+        <GoogleAdSense />
         <OrganizationSchema />
         <WebSiteSchema />
         {children}
